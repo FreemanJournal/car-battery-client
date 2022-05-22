@@ -1,11 +1,18 @@
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ToastContainer } from "react-toastify";
+import PublicRoute from "./routing/PublicRoute";
+import 'react-toastify/dist/ReactToastify.css';
 
 
+const queryClient = new QueryClient();
 function App() {
+
   return (
     <div className="">
-      <h1 className="text-3xl font-bold underline">
-        Hello Mom!
-      </h1>
+      <QueryClientProvider client={queryClient}>
+        <ToastContainer />
+        <PublicRoute />
+      </QueryClientProvider>
     </div>
   );
 }

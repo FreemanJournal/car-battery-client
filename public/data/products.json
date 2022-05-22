@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Teeth Orthodontics",
+    "image":"",
+    "description":"",
+    "min_order":"",
+    "available":"",
+    "price": 99
+
+    
+  },
+  {
+    "name": "Cosmetic Dentistry",
+    "image":"",
+    "description":"",
+    "min_order":"",
+    "available":"",
+    "price": 99
+
+    
+  },
+  {
+    "name": "Teeth Cleaning",
+    "image":"",
+    "description":"",
+    "min_order":"",
+    "available":"",
+    "price": 99
+
+    
+  },
+  {
+    "name": "Cavity Protection",
+    "image":"",
+    "description":"",
+    "min_order":"",
+    "available":"",
+    "price": 99
+
+    
+  },
+  {
+    "name": "Pediatric Dental",
+    "image":"",
+    "description":"",
+    "min_order":"",
+    "available":"",
+    "price": 99
+
+    
+  },
+  {
+    "name": "Oral Surgery",
+    "image":"",
+    "description":"",
+    "min_order":"",
+    "available":"",
+    "price": 99
+
+    
+  }
+]
