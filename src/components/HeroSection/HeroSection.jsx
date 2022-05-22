@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function HeroSection() {
     return (
@@ -32,7 +33,8 @@ export default function HeroSection() {
 
                             <a
                                 className="inline-block duration-200 px-12 py-3 mt-8 text-sm font-medium text-white bg-pink-600 border border-pink-600 rounded active:text-pink-500 hover:bg-transparent hover:text-pink-600 focus:outline-none focus:ring"
-                                href="/contact"
+                                href="#contactUs"
+                                
                             >
                                 Get in Touch
                             </a>

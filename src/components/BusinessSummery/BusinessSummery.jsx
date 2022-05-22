@@ -26,30 +26,30 @@ export default function BusinessSummery() {
 
     return (
         <section>
-            <div class="max-w-screen-xl px-4 py-8 mx-auto">
-                <div class="relative max-w-3xl mx-auto text-center">
-                    <span class="absolute inset-x-0 h-px -translate-y-1/2 bg-black/10 top-1/2"></span>
+            <div className="max-w-screen-xl px-4 py-8 mx-auto">
+                <div className="relative max-w-3xl mx-auto text-center">
+                    <span className="absolute inset-x-0 h-px -translate-y-1/2 bg-black/10 top-1/2"></span>
 
-                    <h2 class="relative inline-block px-4 text-2xl font-bold text-center bg-white capitalize">
+                    <h2 className="relative inline-block px-4 text-2xl font-bold text-center bg-white capitalize">
                         We have served
                     </h2>
                 </div>
 
                 <section className="text-center">
                     <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
-                        <ul className="grid grid-cols-2 gap-4 border-2 border-teal-600 rounded-xl lg:grid-cols-4">
+                        <ul className="grid grid-cols-2 gap-4 border-2 border-slate-600 rounded-xl lg:grid-cols-4">
                             {
                                 data.map((item, i) => {
-                                   return(<li className="p-8 flex flex-col justify-center items-center" key={i}>
+                                    return (<li className="p-8 flex flex-col justify-center items-center" key={i}>
                                         <img src={item.icon} alt="" className='w-24 h-24' />
 
-                                        <p className="text-2xl font-extrabold text-teal-500">{item.state}</p>
-                                        <p className="mt-1 text-lg font-medium text-teal-500">{item.title}</p>
+                                        <p className="text-2xl font-extrabold text-pink-500">{item.state}</p>
+                                        <p className="mt-1 text-lg font-medium text-slate-500">{item.title}</p>
                                     </li>)
                                 })
                             }
 
-                          
+
 
 
                         </ul>
