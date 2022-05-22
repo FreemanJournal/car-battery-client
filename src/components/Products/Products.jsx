@@ -6,8 +6,7 @@ import Loader from '../../utilities/Loader'
 export default function Products() {
     const { isLoading, error, data: products } = useQuery('products', () => privateAxios('/product').then(result => result.data))
 
-    if (isLoading) return <Loader />
-    console.log('products', products);
+    if (isLoading) return <Loader />;
 
     return (
         <section>
@@ -83,9 +82,7 @@ export default function Products() {
 
                 </div>
 
-                {/* <div class="mt-4 text-center">
-                    <button type="button" class="text-xs text-gray-500 underline">Clear Recently Viewed</button>
-                </div> */}
+               
             </div>
         </section>
     )
