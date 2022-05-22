@@ -9,7 +9,7 @@ export default function PublicRoute() {
     <Routes>
       <Route path='/' element={<Home />} />
       <Route path='dashboard' element={<DashboardPage/>}>
-        <Route path='createProduct' element={<CreateNewProduct/>}/>
+        <Route index element={<CreateNewProduct/>}/>
 
 
       </Route>

@@ -9,11 +9,11 @@ export default function Navbar() {
   const [display, setDisplay] = useState(true);
   const menuItems = [
     { item: 'Home', href: "/", status: display },
-    { item: 'About', href: "/about", status: display },
-    { item: 'Orders', href: "/orders", status: display },
-    { item: 'Reviews', href: "/reviews", status: display },
-    { item: 'Contact', href: "/contact", status: display },
-    { item: 'Dashboard', href: "/dashboard", status: !!user },
+    // { item: 'About', href: "/about", status: display },
+    // { item: 'Orders', href: "/orders", status: display },
+    // { item: 'Reviews', href: "/reviews", status: display },
+    // { item: 'Contact', href: "/contact", status: display },
+    { item: 'Dashboard', href: "/dashboard", status: display },
     { item: 'SignIn', href: "/signIn", status: !user },
     { item: 'Registration', href: "/registration", status: !user }]
 
