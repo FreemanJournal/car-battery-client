@@ -1,6 +1,9 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { FcAbout,FcNext, FcBusinessman, FcBusinesswoman, FcServices, FcSettings, FcTodoList,FcPlus } from 'react-icons/fc';
+import { FcAbout, FcHome, FcNext, FcBusinessman, FcBusinesswoman, FcServices, FcSettings, FcTodoList, FcPlus } from 'react-icons/fc';
+import { GrShop,GrFormNext } from 'react-icons/gr';
+import { CgProfile } from 'react-icons/cg';
+import { BsFillChatRightTextFill } from 'react-icons/bs';
 import { Link, Outlet } from 'react-router-dom';
 import auth from '../../utilities/firebase.init';
 
@@ -8,6 +11,39 @@ export default function Dashboard() {
     const [user, loading, error] = useAuthState(auth);
     // const { isAdmin } = useAdmin(user)
     const isAdmin = true
+
+    const sideMenu = [
+        {
+            title: "My Orders",
+            path: "/dashboard",
+            icon: <GrShop />,
+            isActive: true
+        },
+        {
+            title: "My Profile",
+            path: "/dashboard/myProfile",
+            icon: <CgProfile />,
+            isActive: true
+        },
+        {
+            title: "Give a review",
+            path: "/dashboard/createNewReview",
+            icon: <BsFillChatRightTextFill />,
+            isActive: true
+        },
+        {
+            title: "Create new product",
+            path: "/dashboard/createNewProduct",
+            icon: <FcPlus />,
+            isActive: true
+        },
+        {
+            title: "Settings",
+            path: "/dashboard",
+            icon: <FcSettings />,
+            isActive: true
+        },
+    ]
 
     return (
         <section>
@@ -26,56 +62,27 @@ export default function Dashboard() {
 
                         <div className="flex flex-col justify-between h-[85vh] bg-white border-r">
                             <div className="px-4 py-6">
+                                <p
+                                    className="flex items-center text-3xl px-4 py-2 text-gray-700 bg-gray-100 rounded-lg"
+                                >
+                                    <FcHome />
+                                    <span className="ml-3 text-sm font-medium uppercase">Welcome to dashboard </span>
 
+                                </p>
                                 <nav className="flex flex-col mt-6 space-y-1">
-                                    <Link
-                                        to="/dashboard"
-                                        className="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-lg"
-                                    >
-                                        <FcPlus />
-                                        <span className="ml-3 text-sm font-medium uppercase">Create new product </span>
-                                        <FcNext className='ml-auto'/>
-                                    </Link>
-                                    <Link
-                                        to="review"
-                                        className="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-lg"
-                                    >
-                                        <FcAbout />
-                                        <span className="ml-3 text-sm font-medium"> Review </span>
-                                    </Link>
-                                    {isAdmin && <>
-                                        <Link
-                                            to="users"
-                                            className="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-lg"
-                                        >
-                                            <FcBusinessman />
-                                            <span className="ml-3 text-sm font-medium"> All Users </span>
-                                        </Link>
-                                        <Link
-                                            to="add_doctor"
-                                            className="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-lg"
-                                        >
-                                            <FcBusinesswoman />
-                                            <span className="ml-3 text-sm font-medium"> Add New Doctor </span>
-                                        </Link>
-                                        <Link
-                                            to="manageDoctor"
-                                            className="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-lg"
-                                        >
-                                            <FcServices />
-                                            <span className="ml-3 text-sm font-medium"> Manage Doctors </span>
-                                        </Link>
-                                    </>}
-
-                                    <Link
-                                        to="settings"
-                                        className="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-lg"
-                                    >
-                                        <FcSettings />
-                                        <span className="ml-3 text-sm font-medium"> Settings </span>
-                                    </Link>
-
-
+                                    {
+                                        sideMenu.map((item, i) => (
+                                            <Link
+                                                to={item.path}
+                                                key={i}
+                                                className="flex items-center focus:bg-amber-300 px-4 py-2 text-gray-700 group bg-gray-100 rounded-lg hover:bg-slate-200  "
+                                            >
+                                                {item.icon}
+                                                <span className="ml-3 text-sm font-medium uppercase">{item.title} </span>
+                                                <GrFormNext className='ml-auto' />
+                                            </Link>
+                                        ))
+                                    }
 
                                 </nav>
                             </div>
