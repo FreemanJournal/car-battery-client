@@ -31,7 +31,7 @@ export default function HeroSection() {
                             </p>
 
                             <a
-                                className="inline-block px-12 py-3 mt-8 text-sm font-medium text-white bg-pink-600 border border-pink-600 rounded active:text-pink-500 hover:bg-transparent hover:text-pink-600 focus:outline-none focus:ring"
+                                className="inline-block duration-200 px-12 py-3 mt-8 text-sm font-medium text-white bg-pink-600 border border-pink-600 rounded active:text-pink-500 hover:bg-transparent hover:text-pink-600 focus:outline-none focus:ring"
                                 href="/contact"
                             >
                                 Get in Touch

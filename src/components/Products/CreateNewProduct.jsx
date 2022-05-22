@@ -87,7 +87,7 @@ export default function CreateNewProduct() {
                     className="w-full p-3 text-sm border-gray-200 rounded-lg focus:ring-0 focus:outline-none focus:border-slate-800"
                     placeholder="Price per unit"
                     type="text"
-                    inputmode="numeric"
+                    inputMode="numeric"
                     id="price"
                     required
                     {...register("price")}
