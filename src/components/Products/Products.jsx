@@ -1,11 +1,12 @@
 import React from 'react'
 import { useQuery } from 'react-query'
+import { useNavigate } from 'react-router-dom'
 import { privateAxios } from '../../api/privateAxios'
 import Loader from '../../utilities/Loader'
 
 export default function Products() {
     const { isLoading, error, data: products } = useQuery('products', () => privateAxios('/product').then(result => result.data))
-
+    const navigate = useNavigate();
     if (isLoading) return <Loader />;
 
     return (
@@ -60,6 +61,7 @@ export default function Products() {
                                             name="add"
                                             type="button"
                                             class="flex items-center duration-300 justify-center w-full px-12 py-3 mt-8 text-sm font-medium text-white bg-pink-600 border border-pink-600 rounded active:text-pink-500 hover:bg-transparent hover:text-pink-600 focus:outline-none focus:ring"
+                                            onClick={()=>navigate(`/purchasePage/${_id}`)}
                                         >
                                             <span class="text-sm font-medium">
                                                 Place Order

@@ -59,7 +59,8 @@ export default function CreateNewProduct() {
                   <input
                     className="w-full p-3 text-sm border-gray-200 rounded-lg  focus:ring-0 focus:outline-none focus:border-slate-800"
                     placeholder="Minimum order limit"
-                    type="number"
+                    type="text"
+                    inputMode="numeric"
                     id="min_order"
                     required
                     {...register("min_order")}
@@ -73,7 +74,8 @@ export default function CreateNewProduct() {
                   <input
                     className="w-full p-3 text-sm border-gray-200 rounded-lg focus:ring-0 focus:outline-none focus:border-slate-800"
                     placeholder="Available products"
-                    type="number"
+                    type="text"
+                    inputMode="numeric"
                     id="available"
                     required
                     {...register("available")}
