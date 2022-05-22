@@ -13,8 +13,8 @@ export const productSchema = yup.object().shape({
             value => value && value.length > 0)
         .test(
             "fileSize",
-            "Please upload a photo smaller than 300KB.",
-            value => value && (value.length > 0 && value[0]?.size <= 300000))
+            "Please upload a photo smaller than 100KB.",
+            value => value && (value.length > 0 && value[0]?.size <= 100000))
         .test(
             "fileFormat",
             "PNG, JPG, JPEG,SVG,webp up to 100KB",

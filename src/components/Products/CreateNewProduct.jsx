@@ -1,10 +1,9 @@
-import { yupResolver } from '@hookform/resolvers/yup'
-import React, { useEffect, useRef, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { useQuery } from 'react-query'
+import { yupResolver } from '@hookform/resolvers/yup';
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { FcDownload } from "react-icons/fc";
-import axios from 'axios'
-import { toast } from 'react-toastify'
+import { toast } from 'react-toastify';
+import { privateAxios } from '../../api/privateAxios';
 import { productSchema } from '../../utilities/productSchema';
 export default function CreateNewProduct() {
   const { register, handleSubmit, setValue, reset, watch, formState: { errors } } = useForm({ resolver: yupResolver(productSchema) });
@@ -27,9 +26,10 @@ export default function CreateNewProduct() {
   }, [watchImage])
 
   const onSubmitHandler = (value) => {
+
     value.image = imgFile
     console.log('value',value);
-    axios.post(`${process.env.REACT_APP_SERVER_URI}/doctor`, value)
+    privateAxios.post(`/product`, value)
       .then(({ data }) => {
         if (data.success) {
           toast.success(data.message)
@@ -38,9 +38,7 @@ export default function CreateNewProduct() {
         }
       })
   }
-  // if (isLoading) {
-  //   return <Loader />
-  // }
+
   return (
 
 
