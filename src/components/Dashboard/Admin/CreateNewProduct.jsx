@@ -2,6 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FcDownload } from "react-icons/fc";
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { privateAxios } from '../../../api/privateAxios';
 import { productSchema } from '../../../utilities/productSchema';
@@ -24,7 +25,7 @@ export default function CreateNewProduct() {
       convert2base64(watchImage[0])
     }
   }, [watchImage])
-
+const navigate = useNavigate();
   const onSubmitHandler = (value) => {
 
     value.image = imgFile
@@ -35,6 +36,7 @@ export default function CreateNewProduct() {
           toast.success(data.message)
           reset();
           setImgFile();
+          navigate('/dashboard/manageProduct    ')
         }
       })
   }
@@ -152,6 +154,7 @@ export default function CreateNewProduct() {
                 <button
                   type="submit"
                   className="inline-flex font-medium uppercase items-center  justify-center  px-5 py-2 text-white bg-emerald-400 rounded-lg sm:w-auto"
+                  
 
                 >
                   Save

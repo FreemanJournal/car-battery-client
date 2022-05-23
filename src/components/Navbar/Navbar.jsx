@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { NavLink } from 'react-router-dom'
 import auth from '../../utilities/firebase.init';
-import { FcExport } from "react-icons/fc";
+import { FcHome } from "react-icons/fc";
 export default function Navbar() {
   const [user, loading, error] = useAuthState(auth);
   const [display, setDisplay] = useState(true);
@@ -46,9 +46,9 @@ export default function Navbar() {
 
         </ul>
       </div>
-      {/* <div className="navbar-end  lg:hidden">
-        <label htmlFor="my-drawer-2" className=" drawer-button lg:hidden text-3xl cursor-pointer"><FcExport /></label>
-      </div> */}
+      <div className="navbar-end  lg:hidden">
+        <label htmlFor="my-drawer-2" className=" drawer-button lg:hidden text-3xl cursor-pointer"><FcHome /></label>
+      </div>
 
     </section >
   )

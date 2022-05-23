@@ -103,10 +103,10 @@ export default function ManageProducts() {
         </div>
       </div>
 
-      <div className="absolute bottom-24 w-52 right-3 ">
+      <div className="fixed bottom-10 w-52 right-3 opacity-30 hover:opacity-100 duration-300">
         <button
           type="button"
-          className="inline-flex font-medium uppercase items-center  shadow-2xl   justify-center  px-5 py-2 text-white bg-pink-600 rounded-lg sm:w-auto"
+          className="inline-flex font-medium uppercase items-center  shadow-2xl   justify-center  px-5 py-2 text-white bg-emerald-600 rounded-lg sm:w-auto"
           onClick={()=>navigate('/dashboard/createNewProduct')}
         >
           Add New Product
