@@ -8,14 +8,14 @@ import UpdateModal from '../../Products/UpdateModal';
 export default function ManageProducts() {
   const { isLoading, error, data: products } = useQuery('products', () => privateAxios('/product').then(result => result.data))
   const navigate = useNavigate();
-  const {updateItem, setUpdateItem} = useContext(GlobalContext)
+  const { updateItem, setUpdateItem } = useContext(GlobalContext)
 
 
   if (isLoading) return <Loader />;
   const orderTable = ["", "Product Name", "Available", "Unit Price", "Min Order", "", ""]
 
   return (
-    <section class="relative">
+    <section class="relative ">
       <div class="max-w-screen-xl px-4 py-8 mx-auto">
         <div class="relative max-w-3xl mx-auto text-center">
           <span class="absolute inset-x-0 h-px -translate-y-1/2 bg-black/10 top-1/2"></span>
@@ -64,7 +64,7 @@ export default function ManageProducts() {
                       <td className="p-4 text-gray-700 whitespace-nowrap">{price}/unit</td>
                       <td className="p-4 text-gray-700 whitespace-nowrap">{min_order} units</td>
                       <td className="p-4 text-gray-700 whitespace-nowrap">
-                        <label for="productUpdateModal" className="relative inline-flex items-center px-8 py-2 overflow-hidden text-white bg-emerald-500 rounded group  focus:outline-none focus:ring" onClick={()=>navigate(`/dashboard/updateProduct/${_id}`)}>
+                        <label for="productUpdateModal" className="relative inline-flex items-center px-8 py-2 overflow-hidden text-white bg-emerald-500 rounded group  focus:outline-none focus:ring" onClick={() => navigate(`/dashboard/updateProduct/${_id}`)}>
                           <span className="text-sm font-medium ">
                             Update
                           </span>
@@ -77,7 +77,7 @@ export default function ManageProducts() {
                           </span>
                         </button>
                       </td>
-                     
+
 
                     </tr>
                   )
@@ -90,8 +90,19 @@ export default function ManageProducts() {
         </div>
       </div>
 
-      
-    
+      <div className="absolute bottom-24 w-52 right-3 ">
+        <button
+          type="button"
+          className="inline-flex font-medium uppercase items-center  shadow-2xl   justify-center  px-5 py-2 text-white bg-pink-600 rounded-lg sm:w-auto"
+          onClick={()=>navigate('/dashboard/createNewProduct')}
+        >
+          Add New Product
+
+
+        </button>
+
+      </div>
+
 
     </section >
   )
