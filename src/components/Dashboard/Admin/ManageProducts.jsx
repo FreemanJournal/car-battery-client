@@ -6,7 +6,7 @@ import swal from 'sweetalert';
 import { privateAxios } from '../../../api/privateAxios';
 import Loader from '../../../utilities/Loader';
 export default function ManageProducts() {
-  const { isLoading, error,refetch, data: products } = useQuery('products', () => privateAxios('/product').then(result => result.data))
+  const { isLoading, error,refetch, data: products } = useQuery('products', () => privateAxios('/product_all').then(result => result.data))
   const navigate = useNavigate();
 
 
@@ -28,16 +28,16 @@ export default function ManageProducts() {
   }
 
   return (
-    <section class="relative ">
-      <div class="max-w-screen-xl px-4 py-8 mx-auto">
-        <div class="relative max-w-3xl mx-auto text-center">
-          <span class="absolute inset-x-0 h-px -translate-y-1/2 bg-black/10 top-1/2"></span>
+    <section className="relative ">
+      <div className="max-w-screen-xl px-4 py-8 mx-auto">
+        <div className="relative max-w-3xl mx-auto text-center">
+          <span className="absolute inset-x-0 h-px -translate-y-1/2 bg-black/10 top-1/2"></span>
 
-          <h2 class="relative inline-block px-4 text-2xl font-bold text-center bg-white">
+          <h2 className="relative inline-block px-4 text-2xl font-bold text-center bg-white">
             Manage Products
           </h2>
         </div>
-        <div className="overflow-x-auto mb-32">
+        <div className="overflow-x-auto mb-32 mt-5">
 
           <table className="min-w-full text-sm divide-y divide-gray-200 ">
             <thead>
@@ -61,7 +61,7 @@ export default function ManageProducts() {
             <tbody className="divide-y divide-gray-100">
               {
                 products?.map((item, i) => {
-                  const { _id, image, name, description, price, min_order, available } = item
+                  const { _id, name, description, price, min_order, available } = item
 
                   return (
                     <tr key={_id}>
@@ -77,11 +77,11 @@ export default function ManageProducts() {
                       <td className="p-4 text-gray-700 whitespace-nowrap">{price}/unit</td>
                       <td className="p-4 text-gray-700 whitespace-nowrap">{min_order} units</td>
                       <td className="p-4 text-gray-700 whitespace-nowrap">
-                        <label for="productUpdateModal" className="relative inline-flex items-center px-8 py-2 overflow-hidden text-white bg-emerald-500 rounded group  focus:outline-none focus:ring" onClick={() => navigate(`/dashboard/updateProduct/${_id}`)}>
+                        <button  className="relative inline-flex items-center px-8 py-2 overflow-hidden text-white bg-emerald-500 rounded group  focus:outline-none focus:ring" onClick={() => navigate(`/dashboard/updateProduct/${_id}`)}>
                           <span className="text-sm font-medium ">
                             Update
                           </span>
-                        </label>
+                        </button>
                       </td>
                       <td className="p-4 text-gray-700 whitespace-nowrap">
                         <button className="relative inline-flex items-center px-8 py-2 overflow-hidden text-white bg-pink-500 rounded group  focus:outline-none focus:ring-0" onClick={()=>deleteHandler(_id)}>

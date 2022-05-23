@@ -3,6 +3,7 @@ import { ToastContainer } from "react-toastify";
 import PublicRoute from "./routing/PublicRoute";
 import 'react-toastify/dist/ReactToastify.css';
 import "./App.css"
+import { GlobalProvider } from "./context/GlobalContext";
 
 const queryClient = new QueryClient();
 function App() {
@@ -11,7 +12,9 @@ function App() {
     <div className="">
       <QueryClientProvider client={queryClient}>
         <ToastContainer />
-        <PublicRoute />
+        <GlobalProvider>
+          <PublicRoute />
+        </GlobalProvider>
       </QueryClientProvider>
     </div>
   );
