@@ -1,18 +1,31 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import swal from 'sweetalert';
 import { privateAxios } from '../../../api/privateAxios';
-import { GlobalContext } from '../../../context/GlobalContext';
 import Loader from '../../../utilities/Loader';
-import UpdateModal from '../../Products/UpdateModal';
 export default function ManageProducts() {
-  const { isLoading, error, data: products } = useQuery('products', () => privateAxios('/product').then(result => result.data))
+  const { isLoading, error,refetch, data: products } = useQuery('products', () => privateAxios('/product').then(result => result.data))
   const navigate = useNavigate();
-  const { updateItem, setUpdateItem } = useContext(GlobalContext)
 
 
   if (isLoading) return <Loader />;
   const orderTable = ["", "Product Name", "Available", "Unit Price", "Min Order", "", ""]
+
+  const deleteHandler = async (id) =>{
+    const value = await swal(`Do you want to DELETE this item ?`, {
+      buttons: true,
+      dangerMode: true,
+    })
+    if (!value) return;
+    privateAxios.delete(`/product/${id}`).then(({data})=>{
+     if(data.success){
+      toast.success(data.message)
+      refetch();
+     }
+    })
+  }
 
   return (
     <section class="relative ">
@@ -71,7 +84,7 @@ export default function ManageProducts() {
                         </label>
                       </td>
                       <td className="p-4 text-gray-700 whitespace-nowrap">
-                        <button className="relative inline-flex items-center px-8 py-2 overflow-hidden text-white bg-pink-500 rounded group  focus:outline-none focus:ring" >
+                        <button className="relative inline-flex items-center px-8 py-2 overflow-hidden text-white bg-pink-500 rounded group  focus:outline-none focus:ring-0" onClick={()=>deleteHandler(_id)}>
                           <span className="text-sm font-medium ">
                             Delete
                           </span>
