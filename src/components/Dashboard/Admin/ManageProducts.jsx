@@ -14,10 +14,7 @@ export default function ManageProducts() {
   const orderTable = ["", "Product Name", "Available", "Unit Price", "Min Order", "", ""]
 
   const deleteHandler = async (id) =>{
-    const value = await swal(`Do you want to DELETE this item ?`, {
-      buttons: true,
-      dangerMode: true,
-    })
+    const value = await swal({title:`Do you want to DELETE this item ?`,buttons:true,dangerMode:true,icon:"warning"})
     if (!value) return;
     privateAxios.delete(`/product/${id}`).then(({data})=>{
      if(data.success){
@@ -37,7 +34,7 @@ export default function ManageProducts() {
             Manage Products
           </h2>
         </div>
-        <div className="overflow-x-auto mb-32 mt-5">
+        <div className="overflow-x-auto mb-32 mt-10">
 
           <table className="min-w-full text-sm divide-y divide-gray-200 ">
             <thead>

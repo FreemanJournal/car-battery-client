@@ -1,13 +1,15 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import swal from 'sweetalert';
 import { privateAxios } from '../../../api/privateAxios';
 import Loader from '../../../utilities/Loader';
 
 export default function MyOrders() {
   // const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
-  const { isLoading, data } = useQuery(['orders'], () =>
+  const { isLoading, data,refetch } = useQuery(['orders'], () =>
     privateAxios(`/order`).then(res => {
       // if (res.status !== 200) {
       //   signOut(auth)
@@ -21,8 +23,17 @@ export default function MyOrders() {
   if (isLoading) {
     return <Loader />
   }
-  const orderTable = ["", "Product Name", "Purchase qtn", "Rate", "Total", "Transaction ID", "Payment"]
-
+  const orderTable = ["", "Product Name", "Purchase qtn", "Rate", "Total", "Transaction ID", "Payment", ""]
+  const deleteHandler = async (id) =>{
+    const value = await swal({title:`Do you want to DELETE this order ?`,dangerMode:true,buttons:true,icon:"warning"})
+    if (!value) return;
+    privateAxios.delete(`/order/${id}`).then(({data})=>{
+     if(data.success){
+      toast.success(data.message)
+      refetch();
+     }
+    })
+  }
 
   return (
     <section class="relative ">
@@ -34,7 +45,7 @@ export default function MyOrders() {
             My Orders
           </h2>
         </div>
-        <div className="overflow-x-auto mb-32">
+        <div className="overflow-x-auto mb-32 mt-10">
 
           <table className="min-w-full text-sm divide-y divide-gray-200 ">
             <thead>
@@ -75,7 +86,7 @@ export default function MyOrders() {
                       <td className="p-4 text-gray-700 whitespace-nowrap">{transactionId ? transactionId : "NULL"}</td>
 
                       <td className="p-4 text-gray-700 whitespace-nowrap">{!paid ?
-                        <Link to={`/dashboard/payment/${_id}`} className="relative inline-flex items-center px-8 py-3 overflow-hidden text-white bg-pink-600 rounded group hover:bg-pink-600 focus:outline-none focus:ring">
+                        <Link to={`/dashboard/payment/${_id}`} className="relative inline-flex items-center px-8 py-2 overflow-hidden text-white bg-pink-600 rounded group hover:bg-pink-600 focus:outline-none focus:ring">
                           <span className="absolute right-0 transition-transform translate-x-full group-hover:-translate-x-4">
                             <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -87,12 +98,20 @@ export default function MyOrders() {
                           </span>
                         </Link>
                         :
-                        <p className="relative inline-flex items-center px-8 py-3 overflow-hidden text-white bg-emerald-500 rounded group  focus:outline-none focus:ring" >
+                        <p className="relative inline-flex items-center px-8 py-2 overflow-hidden text-white bg-emerald-500 rounded group  focus:outline-none focus:ring" >
                           <span className="text-sm font-medium ">
                             Paid
                           </span>
                         </p>
                       }</td>
+                      <td className="p-4 text-gray-700 whitespace-nowrap">
+                        <button className="relative inline-flex items-center px-8 py-2 overflow-hidden text-white bg-pink-500 rounded group  focus:outline-none focus:ring disabled:cursor-not-allowed disabled:opacity-50" onClick={()=>deleteHandler(_id)} disabled={!!paid}>
+                          <span className="text-sm font-medium ">
+                            Delete
+                          </span>
+                        </button>
+                      </td>
+
 
                     </tr>
                   )

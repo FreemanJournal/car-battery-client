@@ -114,9 +114,10 @@ export default function CheckoutForm({ order }) {
                 <button
                     className="btn-pink w-full disabled:hover:text-white disabled:bg-slate-300 disabled:border-0 disabled:cursor-not-allowed"
                     type="submit"
-                    disabled={!stripe || !cLientSecret}
+                    disabled={!stripe || !cLientSecret || isLoading}
 
                 >
+                    {isLoading &&  <svg class="motion-reduce:hidden animate-spin ..." viewBox="0 0 24 24"></svg>}
                     Confirm Payment
                 </button>
             </form>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { FcAbout, FcHome, FcNext, FcBusinessman, FcBusinesswoman, FcServices, FcSettings, FcTodoList, FcPlus } from 'react-icons/fc';
-import { GrShop,GrFormNext } from 'react-icons/gr';
+import { GrShop, GrFormNext } from 'react-icons/gr';
 import { CgProfile } from 'react-icons/cg';
 import { BsFillChatRightTextFill } from 'react-icons/bs';
 import { Link, Outlet } from 'react-router-dom';
@@ -44,6 +44,12 @@ export default function Dashboard() {
             isActive: true
         },
         {
+            title: "Manage Orders",
+            path: "/dashboard/manageOrder",
+            icon: <FcServices />,
+            isActive: true
+        },
+        {
             title: "Settings",
             path: "/dashboard",
             icon: <FcSettings />,
@@ -68,20 +74,21 @@ export default function Dashboard() {
 
                         <div className="flex flex-col justify-between h-[85vh] bg-white border-r">
                             <div className="px-4 py-6">
-                                <p
+                                <Link
+                                    to="/dashboard"
                                     className="flex items-center text-3xl px-4 py-2 text-gray-700 bg-gray-100 rounded-lg"
                                 >
                                     <FcHome />
                                     <span className="ml-3 text-sm font-medium uppercase">Welcome to dashboard </span>
 
-                                </p>
-                                <nav className="flex flex-col mt-6 space-y-1">
+                                </Link>
+                                <nav className="flex flex-col mt-6  space-y-1">
                                     {
                                         sideMenu.map((item, i) => (
                                             <Link
                                                 to={item.path}
                                                 key={i}
-                                                className="flex items-center focus:bg-amber-300 px-4 py-2 text-gray-700 group bg-gray-100 rounded-lg hover:bg-slate-200  "
+                                                className="flex items-center focus:bg-amber-300 px-4 py-2 text-gray-700  bg-gray-100 rounded-lg hover:bg-slate-200  "
                                             >
                                                 {item.icon}
                                                 <span className="ml-3 text-sm font-medium uppercase">{item.title} </span>
@@ -92,6 +99,7 @@ export default function Dashboard() {
 
                                 </nav>
                             </div>
+                           
 
                             {/* <div className="sticky inset-x-0 bottom-0 border-t border-gray-100">
                                 <Link to="/dashboard" className="flex items-center p-4 bg-white hover:bg-gray-50 shrink-0">
