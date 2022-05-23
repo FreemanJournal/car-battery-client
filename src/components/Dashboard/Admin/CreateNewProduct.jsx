@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FcDownload } from "react-icons/fc";
 import { toast } from 'react-toastify';
-import { privateAxios } from '../../api/privateAxios';
-import { productSchema } from '../../utilities/productSchema';
+import { privateAxios } from '../../../api/privateAxios';
+import { productSchema } from '../../../utilities/productSchema';
 export default function CreateNewProduct() {
   const { register, handleSubmit, setValue, reset, watch, formState: { errors } } = useForm({ resolver: yupResolver(productSchema) });
   const [imgFile, setImgFile] = useState();

@@ -16,20 +16,23 @@ export default function Payment() {
 
   const navigate = useNavigate();
   if (isLoading) return <Loader />;
-  const { _id, address, phone, quantity, name, email, rate, total, orderID, paid, transactionId } = order;
+  const { _id, address, image, phone, quantity, name, email, rate, total, orderID, paid, transactionId } = order;
 
   return (
-    <section className="text-gray-600 body-font overflow-hidden">
+    <section class="relative ">
+    <div class="max-w-screen-xl px-4 py-8 mx-auto">
+      <div class="relative max-w-3xl mx-auto text-center">
+        <span class="absolute inset-x-0 h-px -translate-y-1/2 bg-black/10 top-1/2"></span>
+
+        <h2 class="relative inline-block px-4 text-2xl font-bold text-center bg-white">
+          Order Details
+        </h2>
+      </div>
+      <section className="text-gray-600 body-font overflow-hidden">
       <div className="container px-5 py-10 mx-auto">
         <div className="lg:w-4/5 mx-auto flex flex-wrap">
           <div className="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
-            {/* <div className="group">
-                            <img
-                                className="group-hover:scale-105 transition-transform duration-500 object-cover w-full h-[350px] sm:h-[350px]"
-                                src={image}
-                                alt="Basic Tee Product"
-                            />
-                        </div> */}
+           
             <h2 className="text-sm title-font text-gray-500 tracking-widest">#{orderID}</h2>
             <h1 className="text-gray-900 text-3xl title-font font-medium mb-4">{name}</h1>
 
@@ -60,7 +63,7 @@ export default function Payment() {
                   <span className="ml-auto text-gray-900">${total}</span>
                 </div>
                 <Elements stripe={stripePromise}>
-                  <CheckoutForm order={order}/>
+                  <CheckoutForm order={order} />
                 </Elements>
               </div>
             </div>
@@ -69,5 +72,11 @@ export default function Payment() {
         </div>
       </div>
     </section>
+    </div>
+
+  
+
+
+  </section >
   )
 }

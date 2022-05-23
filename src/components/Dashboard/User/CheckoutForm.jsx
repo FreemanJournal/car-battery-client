@@ -1,9 +1,8 @@
-import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { privateAxios } from '../../../api/privateAxios';
-import Loader from '../../../utilities/Loader';
 
 export default function CheckoutForm({ order }) {
     const stripe = useStripe();
@@ -13,75 +12,74 @@ export default function CheckoutForm({ order }) {
     const [transectionId, setTransactionId] = useState();
     const [isLoading, setIsLoading] = useState(false);
     const { _id, address, phone, quantity, name, email, rate, total, orderID, paid, transactionId } = order;
+    console.log('payment info',phone,email,total);
 
+    const navigate = useNavigate()
+    useEffect(() => {
+        privateAxios.post(`/create-payment-intent`, { total })
+            .then(({ data }) => {
+                setCLientSecret(data?.clientSecret)
+            })
 
-    // useEffect(() => {
-    //     privateAxios.post(`/create-payment-intent`, { total })
-    //         .then(({ data }) => {
-    //             setCLientSecret(data?.clientSecret)
-    //         })
+    }, [total])
 
-    // }, [total])
-
-    console.log('cLientSecret',cLientSecret);
 
     const handleSubmit = async (event) => {
         // Block native form submission.
         event.preventDefault();
-        // setIsLoading(prev => !prev)
-        // if (!stripe || !elements) return;
-        // const card = elements.getElement(CardElement);
-        // if (card == null) return;
-        // const { error, paymentMethod } = await stripe.createPaymentMethod({
-        //     type: 'card',
-        //     card,
-        // });
+        setIsLoading(prev => !prev)
+        if (!stripe || !elements) return;
+        const card = elements.getElement(CardElement);
+        if (card == null) return;
+        const { error, paymentMethod } = await stripe.createPaymentMethod({
+            type: 'card',
+            card,
+        });
 
-        // if (error) {
-        //     setCardError(error.message)
-        //     // console.log('[error]', error);
-        // } else {
-        //     setCardError()
+        if (error) {
+            setCardError(error.message)
+            // console.log('[error]', error);
+        } else {
+            setCardError()
 
-        // }
+        }
 
-        // const { paymentIntent, error: intentError } = await stripe.confirmCardPayment(
-        //     cLientSecret,
-        //     {
-        //         payment_method: {
-        //             card: card,
-        //             billing_details: {
-        //                 name: "Md Ishaq",
-        //                 email: email,
-        //                 phone: phone
-        //             },
-        //         },
-        //     },
-        // );
-        // if (intentError) {
-        //     setIsLoading(prev => !prev)
-        //     setCardError(intentError?.message)
-        // } else {
-        //     const paymentInfo = {
-        //         transactionId: paymentIntent.id,
-        //         name: "Md Ishaq",
-        //         email: email,
-        //         phone: phone
-        //     }
-        //     console.log('paymentInfo', paymentInfo);
-        //     setTransactionId(paymentIntent.id)
-        //     // axios.patch(`${process.env.REACT_APP_SERVER_URI}/appointment/${_id}`, paymentInfo, {
-        //     //     headers: {
-        //     //         "authorization": `Bearer ${localStorage.getItem('accessToken')}`
-        //     //     }
-        //     // })
-        //     //     .then(({ data }) => {
-        //     //         setIsLoading(prev => !prev)
-        //     //         toast.success(data.message,{toastId:"Hello"})
-        //     //     })
-        //     toast.success(`Your payment is successful.Transaction ID is :${paymentIntent.id}`)
-        //     setCardError('');
-        // }
+        const { paymentIntent, error: intentError } = await stripe.confirmCardPayment(
+            cLientSecret,
+            {
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        name: "Md Ishaq",
+                        email: email,
+                        phone: phone
+                    },
+                },
+            },
+        );
+        if (intentError) {
+            setIsLoading(prev => !prev)
+            setCardError(intentError?.message)
+        } else {
+            const paymentInfo = {
+                transactionId: paymentIntent.id,
+                name: "Md Ishaq",
+                email: email,
+                phone: phone,
+                product:name
+            }
+            setTransactionId(paymentIntent.id)
+            privateAxios.patch(`/payment/${_id}`, paymentInfo)
+                .then(({ data }) => {
+                    setIsLoading(prev => !prev)
+                    toast.success(data.message,{toastId:"Hello"})
+                    navigate('/dashboard')
+                    
+                })
+            // toast.success(`Your payment is successful.Transaction ID is :${paymentIntent.id}`)
+            setCardError('');
+            setIsLoading(prev => !prev)
+        }
 
 
     };

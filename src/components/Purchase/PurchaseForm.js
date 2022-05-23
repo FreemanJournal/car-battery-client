@@ -5,7 +5,8 @@ import { purchaseSchema } from '../../utilities/purchaseSchema';
 import { v4 as uuidv4 } from 'uuid';
 import { privateAxios } from '../../api/privateAxios';
 import { toast } from 'react-toastify';
-export default function PurchaseForm({ price, min_order, available,name }) {
+import { useNavigate } from 'react-router-dom';
+export default function PurchaseForm({ price, min_order, available, name }) {
     const { register, handleSubmit, setValue, reset, setError, clearErrors, watch, formState: { errors } } = useForm({ resolver: yupResolver(purchaseSchema) });
     const watchQuantity = watch("quantity");
     const watchPhone = watch("phone");
@@ -13,9 +14,9 @@ export default function PurchaseForm({ price, min_order, available,name }) {
 
     useEffect(() => {
         reset({
-          quantity: min_order
+            quantity: min_order
         })
-      }, [min_order])
+    }, [min_order])
 
     useEffect(() => {
         if (+watchQuantity < min_order || +watchQuantity > available) {
@@ -25,27 +26,28 @@ export default function PurchaseForm({ price, min_order, available,name }) {
             clearErrors()
         }
     }, [watchQuantity])
+    const navigate = useNavigate();
 
-
-    const onSubmitHandler = (value) => { 
+    const onSubmitHandler = (value) => {
         console.log(value);
-        privateAxios.post('/order',value)
-        .then(({data})=>{
-           if(data.success){
-            toast.success("An order placed successfully")
-            reset()
-           }
-        })
+        privateAxios.post('/order', value)
+            .then(({ data }) => {
+                if (data.success) {
+                    toast.success("An order placed successfully")
+                    reset()
+                    navigate('/dashboard')
+                }
+            })
 
     }
-    const onClickHandler = () =>{
-        setValue('name',name)
-        setValue('customer_Name',"Md Ishaq")
-        setValue('email',"ishaqrabbu97@gmail.com")
-        setValue('rate',price)
-        setValue('total',price * (+watchQuantity))
+    const onClickHandler = () => {
+        setValue('name', name)
+        setValue('customer_Name', "Md Ishaq")
+        setValue('email', "ishaqrabbu97@gmail.com")
+        setValue('rate', price)
+        setValue('total', price * (+watchQuantity))
         setValue('orderID', uuidv4());
-        
+
     }
     return (
         <div className="max-w-lg px-4 mx-auto lg:px-8 h-full flex flex-col">

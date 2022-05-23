@@ -4,9 +4,9 @@ import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { privateAxios } from '../../api/privateAxios';
-import Loader from '../../utilities/Loader';
-import { UpdateProductSchema } from '../../utilities/UpdateProductSchema';
+import { privateAxios } from '../../../api/privateAxios';
+import Loader from '../../../utilities/Loader';
+import { UpdateProductSchema } from '../../../utilities/UpdateProductSchema';
 export default function UpdateProducts() {
   const { productID } = useParams()
   const navigate = useNavigate();
