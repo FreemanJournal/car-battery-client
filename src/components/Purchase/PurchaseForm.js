@@ -5,7 +5,7 @@ import { purchaseSchema } from '../../utilities/purchaseSchema';
 import { v4 as uuidv4 } from 'uuid';
 import { privateAxios } from '../../api/privateAxios';
 import { toast } from 'react-toastify';
-export default function PurchaseForm({ price, min_order, available }) {
+export default function PurchaseForm({ price, min_order, available,name }) {
     const { register, handleSubmit, setValue, reset, setError, clearErrors, watch, formState: { errors } } = useForm({ resolver: yupResolver(purchaseSchema) });
     const watchQuantity = watch("quantity");
     const watchPhone = watch("phone");
@@ -39,8 +39,9 @@ export default function PurchaseForm({ price, min_order, available }) {
 
     }
     const onClickHandler = () =>{
-        setValue('name',"Md Ishaq")
+        setValue('name',name)
         setValue('email',"ishaqrabbu97@gmail.com")
+        setValue('rate',price)
         setValue('total',price * (+watchQuantity))
         setValue('orderID', uuidv4());
         

@@ -37,7 +37,7 @@ export default function Purchase({ productID }) {
 
                     </div>
                     <div className="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
-                        <PurchaseForm price={price} min_order={min_order} available={available}/>
+                        <PurchaseForm price={price} min_order={min_order} available={available} name={name}/>
                     </div>
 
                 </div>
