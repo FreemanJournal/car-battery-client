@@ -1,9 +1,12 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
+import ManageProducts from '../components/Dashboard/Admin/ManageProducts'
 import CreateNewReview from '../components/Dashboard/User/CreateNewReview'
 import MyOrders from '../components/Dashboard/User/MyOrders'
 import MyProfile from '../components/Dashboard/User/MyProfile'
+import Payment from '../components/Dashboard/User/Payment'
 import CreateNewProduct from '../components/Products/CreateNewProduct'
+import UpdateProducts from '../components/Products/UpdateProducts'
 import DashboardPage from '../pages/DashboardPage'
 import Home from '../pages/Home'
 import PurchasePage from '../pages/PurchasePage'
@@ -15,7 +18,10 @@ export default function PublicRoute() {
       <Route path='/purchasePage/:productID' element={<PurchasePage/>} />
       <Route path='dashboard' element={<DashboardPage/>}>
         <Route index element={<MyOrders/>}/>
+        <Route path='payment/:productID' element={<Payment/>}/>
         <Route path='myProfile' element={<MyProfile/>}/>
+        <Route path='manageProduct' element={<ManageProducts/>}/>
+        <Route path='updateProduct/:productID' element={<UpdateProducts/>}/>
         <Route path='createNewReview' element={<CreateNewReview/>}/>
         <Route path='createNewProduct' element={<CreateNewProduct/>}/>
       </Route>

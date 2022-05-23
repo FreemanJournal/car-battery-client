@@ -38,6 +38,12 @@ export default function Dashboard() {
             isActive: true
         },
         {
+            title: "Manage Products",
+            path: "/dashboard/manageProduct",
+            icon: <FcServices />,
+            isActive: true
+        },
+        {
             title: "Settings",
             path: "/dashboard",
             icon: <FcSettings />,
@@ -46,17 +52,17 @@ export default function Dashboard() {
     ]
 
     return (
-        <section>
+        <section className='relative'>
             <main className="drawer drawer-mobile h-auto">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content ">
+                <div className="drawer-content  relative">
                     {/* <!-- Page content here --> */}
                     <Outlet />
 
 
                 </div>
-                <div className="drawer-side">
-                    <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
+                <div className="drawer-side ">
+                    <label htmlFor="my-drawer-2" className=""></label>
                     <ul className="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content ">
                         {/* <!-- Sidebar content here --> */}
 
@@ -87,7 +93,7 @@ export default function Dashboard() {
                                 </nav>
                             </div>
 
-                            <div className="sticky inset-x-0 bottom-0 border-t border-gray-100">
+                            {/* <div className="sticky inset-x-0 bottom-0 border-t border-gray-100">
                                 <Link to="/dashboard" className="flex items-center p-4 bg-white hover:bg-gray-50 shrink-0">
                                     <img
                                         className="object-cover w-10 h-10 rounded-full"
@@ -103,7 +109,7 @@ export default function Dashboard() {
                                         </p>
                                     </div>
                                 </Link>
-                            </div>
+                            </div> */}
                         </div>
                     </ul>
 

@@ -21,7 +21,7 @@ export default function MyOrders() {
   if (isLoading) {
     return <Loader />
   }
-  const bookingTable = ["","Product Name", "Purchase qtn","Rate" ,"Total", "Transaction ID", "Payment"]
+  const orderTable = ["","Product Name", "Purchase qtn","Rate" ,"Total", "Transaction ID", "Payment"]
 
 
   return (
@@ -31,7 +31,7 @@ export default function MyOrders() {
         <thead>
           <tr>
 
-            {bookingTable.map((item, index) => {
+            {orderTable.map((item, index) => {
 
               return (
                 <th key={index} className="p-4 font-medium text-left text-gray-900 whitespace-nowrap">
@@ -48,8 +48,8 @@ export default function MyOrders() {
 
         <tbody className="divide-y divide-gray-100">
           {
-            data?.map((patient,i) => {
-              const { _id, address,phone,quantity,name,email,rate,total,orderID,paid,transactionId } = patient;
+            data?.map((order,i) => {
+              const { _id, address,phone,quantity,name,email,rate,total,orderID,paid,transactionId } = order;
               return (
                 <tr key={_id}>
 
@@ -61,12 +61,12 @@ export default function MyOrders() {
                   </td>
 
                   <td className="p-4 text-gray-700 whitespace-nowrap">{quantity}</td>
-                  <td className="p-4 text-gray-700 whitespace-nowrap">{rate}</td>
-                  <td className="p-4 text-gray-700 whitespace-nowrap">{total}</td>
+                  <td className="p-4 text-gray-700 whitespace-nowrap">${rate}/unit</td>
+                  <td className="p-4 text-gray-700 whitespace-nowrap">${total}</td>
                   <td className="p-4 text-gray-700 whitespace-nowrap">{transactionId ? transactionId : "NULL"}</td>
 
                   <td className="p-4 text-gray-700 whitespace-nowrap">{!paid ?
-                    <Link to={`payment/${_id}`} className="relative inline-flex items-center px-8 py-3 overflow-hidden text-white bg-pink-600 rounded group hover:bg-pink-600 focus:outline-none focus:ring">
+                    <Link to={`/dashboard/payment/${_id}`} className="relative inline-flex items-center px-8 py-3 overflow-hidden text-white bg-pink-600 rounded group hover:bg-pink-600 focus:outline-none focus:ring">
                       <span className="absolute right-0 transition-transform translate-x-full group-hover:-translate-x-4">
                         <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />

@@ -40,6 +40,7 @@ export default function PurchaseForm({ price, min_order, available,name }) {
     }
     const onClickHandler = () =>{
         setValue('name',name)
+        setValue('customer_Name',"Md Ishaq")
         setValue('email',"ishaqrabbu97@gmail.com")
         setValue('rate',price)
         setValue('total',price * (+watchQuantity))
