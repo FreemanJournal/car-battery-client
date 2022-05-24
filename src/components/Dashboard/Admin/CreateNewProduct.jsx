@@ -36,7 +36,7 @@ const navigate = useNavigate();
           toast.success(data.message)
           reset();
           setImgFile();
-          navigate('/dashboard/manageProduct    ')
+          navigate('/dashboard/manageProduct')
         }
       })
   }
@@ -110,6 +110,7 @@ const navigate = useNavigate();
                   placeholder="Description"
                   rows="8"
                   id="description"
+                  required
                   {...register("description")}
                 ></textarea>
               </div>

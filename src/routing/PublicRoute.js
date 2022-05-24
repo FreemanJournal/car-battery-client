@@ -12,11 +12,15 @@ import Payment from '../components/Dashboard/User/Payment'
 import DashboardPage from '../pages/DashboardPage'
 import Home from '../pages/Home'
 import PurchasePage from '../pages/PurchasePage'
+import Registration from '../pages/Registration'
+import SignInPage from '../pages/SignInPage'
 
 export default function PublicRoute() {
   return (
     <Routes>
       <Route path='/' element={<Home />} />
+      <Route path='/signIn' element={<SignInPage />} />
+      <Route path='/registration' element={<Registration />} />
       <Route path='/purchasePage/:productID' element={<PurchasePage/>} />
       <Route path='dashboard' element={<DashboardPage/>}>
         <Route index element={<MyOrders/>}/>

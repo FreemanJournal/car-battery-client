@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useQuery } from 'react-query';
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import swal from 'sweetalert';
+import { useNavigate } from 'react-router-dom';
 import { privateAxios } from '../../../api/privateAxios';
 import Loader from '../../../utilities/Loader';
 import OrdersRow from './OrdersRow';
