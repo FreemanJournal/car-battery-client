@@ -1,32 +1,60 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { set, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import StarRatings from 'react-star-ratings/build/star-ratings';
+import { toast } from 'react-toastify';
+import { privateAxios } from '../../../api/privateAxios';
+import auth from '../../../utilities/firebase.init';
+let userImage;
 export default function CreateNewReview() {
-  const { register, handleSubmit, setValue, reset, watch, formState: { errors } } = useForm();
+  const [user, loading, error] = useAuthState(auth);
+
+  const { register, handleSubmit, setValue,setError,clearErrors, reset, watch, formState: { errors } } = useForm();
   const [imgFile, setImgFile] = useState();
   const [ratings, setRatings] = useState();
-  
+  const convert2base64 = file => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImgFile(reader.result.toString())
+    }
+    reader.readAsDataURL(file)
 
+  }
+
+  useEffect(() => {
+    if (user?.photoURL) {
+      userImage = <img src={user?.photoURL} alt="user" />
+    } else {
+      userImage = <svg xmlns="http://www.w3.org/2000/svg" className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2A10.13 10.13 0 0 0 2 12a10 10 0 0 0 4 7.92V20h.1a9.7 9.7 0 0 0 11.8 0h.1v-.08A10 10 0 0 0 22 12 10.13 10.13 0 0 0 12 2zM8.07 18.93A3 3 0 0 1 11 16.57h2a3 3 0 0 1 2.93 2.36 7.75 7.75 0 0 1-7.86 0zm9.54-1.29A5 5 0 0 0 13 14.57h-2a5 5 0 0 0-4.61 3.07A8 8 0 0 1 4 12a8.1 8.1 0 0 1 8-8 8.1 8.1 0 0 1 8 8 8 8 0 0 1-2.39 5.64z"></path><path d="M12 6a3.91 3.91 0 0 0-4 4 3.91 3.91 0 0 0 4 4 3.91 3.91 0 0 0 4-4 3.91 3.91 0 0 0-4-4zm0 6a1.91 1.91 0 0 1-2-2 1.91 1.91 0 0 1 2-2 1.91 1.91 0 0 1 2 2 1.91 1.91 0 0 1-2 2z"></path></svg>
+    }
+
+  }, [user])
 
 
   const navigate = useNavigate();
-  function changeRating( newRating, name ) {
+  function changeRating(newRating, name) {
     setRatings(newRating)
-    setValue(name,newRating)
+    setValue(name, newRating)
+    setValue('user',user?.displayName)
+    clearErrors();
   }
   const onSubmitHandler = (value) => {
-   
     console.log('value', value);
-    // privateAxios.post(`/product`, value)
-    //   .then(({ data }) => {
-    //     if (data.success) {
-    //       toast.success(data.message)
-    //       reset();
-    //       setImgFile();
-    //       navigate('/dashboard/manageProduct')
-    //     }
-    //   })
+   
+    if(!value.rating ){
+      return setError('rating', {type:'required',message:"Please give a rating!"})
+    }
+  
+    privateAxios.post(`/review`, value)
+      .then(({ data }) => {
+        if (data.success) {
+          toast.success("You have posted a new review.")
+          reset();
+          setRatings()
+          // navigate('/dashboard/manageProduct')
+        }
+      })
   }
 
   return (
@@ -41,11 +69,7 @@ export default function CreateNewReview() {
               <div className='relative'>
                 <div className="mt-1 flex items-center">
                   <span className="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                    {imgFile ? <img src={imgFile} alt="doctor" /> :
-                      <>
-
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24"><path d="M22 8a.76.76 0 0 0 0-.21v-.08a.77.77 0 0 0-.07-.16.35.35 0 0 0-.05-.08l-.1-.13-.08-.06-.12-.09-9-5a1 1 0 0 0-1 0l-9 5-.09.07-.11.08a.41.41 0 0 0-.07.11.39.39 0 0 0-.08.1.59.59 0 0 0-.06.14.3.3 0 0 0 0 .1A.76.76 0 0 0 2 8v8a1 1 0 0 0 .52.87l9 5a.75.75 0 0 0 .13.06h.1a1.06 1.06 0 0 0 .5 0h.1l.14-.06 9-5A1 1 0 0 0 22 16V8zm-10 3.87L5.06 8l2.76-1.52 6.83 3.9zm0-7.72L18.94 8 16.7 9.25 9.87 5.34zM4 9.7l7 3.92v5.68l-7-3.89zm9 9.6v-5.68l3-1.68V15l2-1v-3.18l2-1.11v5.7z"></path></svg></>
-                    }
+                    {userImage}
                   </span>
 
                   <label
@@ -58,11 +82,11 @@ export default function CreateNewReview() {
                     </div>
                   </label>
                 </div>
-               
+
               </div>
               <div>
                 <label className="sr-only" htmlFor="name">Rating</label>
-               
+
                 <StarRatings
                   rating={ratings}
                   starRatedColor="rgb(250 204 21 / 1)"
@@ -70,6 +94,7 @@ export default function CreateNewReview() {
                   numberOfStars={5}
                   name='rating'
                 />
+
               </div>
 
 
@@ -87,6 +112,9 @@ export default function CreateNewReview() {
                   {...register("comment")}
                 ></textarea>
               </div>
+
+              {errors?.rating && <p className='text-sm'><span className='text-pink-500'>{errors?.rating.message}</span></p>}
+
 
 
               <div className="mt-4 flex gap-5 justify-end">

@@ -43,7 +43,6 @@ export default function Authorization({ signIn }) {
                 .then(async () => {
                     setAuthProvider('updating')
                     await updateProfile({ displayName })
-                    toast.success('Account create successfully')
                 })
         }
     }, [signIn])
@@ -74,7 +73,7 @@ export default function Authorization({ signIn }) {
     }
 
     return (
-        <div className="flex max-w-md mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 my-32">
+        <div className="flex max-w-md mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 my-5">
 
             <div className="w-full px-6 py-8 md:px-8  mx-auto">
                 <h2 className="text-2xl font-semibold text-center text-gray-700 dark:text-white">Speed Battery Manufacturer</h2>

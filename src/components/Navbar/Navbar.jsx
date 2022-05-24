@@ -1,7 +1,7 @@
 import { signOut } from 'firebase/auth';
 import React, { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import auth from '../../utilities/firebase.init';
 import { FcHome } from "react-icons/fc";
 export default function Navbar() {
@@ -13,7 +13,7 @@ export default function Navbar() {
     // { item: 'Orders', href: "/orders", status: display },
     // { item: 'Reviews', href: "/reviews", status: display },
     // { item: 'Contact', href: "/contact", status: display },
-    { item: 'Dashboard', href: "/dashboard", status: display },
+    { item: 'Dashboard', href: "/dashboard", status: !!user },
     { item: 'SignIn', href: "/signIn", status: !user },
     { item: 'Registration', href: "/registration", status: !user }]
 
@@ -42,7 +42,9 @@ export default function Navbar() {
           {menuItems.map((menu, index) => (
             <NavLink to={menu.href} key={index} style={({ isActive }) => isActive ? { borderBottom:'5px solid rgb(185 28 28 / 1)',color:'rgb(185 28 28 / 1)' } : {}} className={`block h-16 leading-[4rem] border-b-4 border-transparent hover:text-red-700 hover:border-current ${menu.status ? "" : "hidden"}`}>{menu.item}</NavLink>
           ))}
-          {user && <button onClick={() => signOutHandler()} className='block h-16 leading-[4rem] border-b-4 border-transparent hover:text-red-700 hover:border-current'>Sign Out</button>}
+          {user && <Link to="/dashboard"  className={`block h-16 leading-[4rem] border-b-4 border-transparent hover:text-red-700 hover:border-0`}>{user?.displayName}</Link>}
+
+          {user && <button onClick={() => signOutHandler()} className='block uppercase font-bold h-16 leading-[4rem] border-b-4 border-transparent hover:text-red-700 hover:border-current'>Sign Out</button>}
 
         </ul>
       </div>

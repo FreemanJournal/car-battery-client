@@ -14,6 +14,7 @@ import Home from '../pages/Home'
 import PurchasePage from '../pages/PurchasePage'
 import Registration from '../pages/Registration'
 import SignInPage from '../pages/SignInPage'
+import PrivateRoute from './PrivateRoute'
 
 export default function PublicRoute() {
   return (
@@ -21,8 +22,8 @@ export default function PublicRoute() {
       <Route path='/' element={<Home />} />
       <Route path='/signIn' element={<SignInPage />} />
       <Route path='/registration' element={<Registration />} />
-      <Route path='/purchasePage/:productID' element={<PurchasePage/>} />
-      <Route path='dashboard' element={<DashboardPage/>}>
+      <Route path='/purchasePage/:productID' element={<PrivateRoute><PurchasePage/></PrivateRoute>} />
+      <Route path='dashboard' element={<PrivateRoute><DashboardPage/></PrivateRoute>}>
         <Route index element={<MyOrders/>}/>
         <Route path='payment/:productID' element={<Payment/>}/>
         <Route path='myProfile' element={<MyProfile/>}/>
