@@ -31,7 +31,7 @@ export default function FAQ() {
                 <div className="space-y-4 py-16">
                     {
                         data.map((item, i) => (
-                            <details className="group">
+                            <details className="group" key={i}>
                                 <summary
                                     className="flex items-center justify-between p-4 rounded-lg cursor-pointer bg-gray-50"
                                 >
@@ -47,9 +47,9 @@ export default function FAQ() {
                                         stroke="currentColor"
                                     >
                                         <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
                                             d="M19 9l-7 7-7-7"
                                         />
                                     </svg>

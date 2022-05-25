@@ -1,12 +1,13 @@
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { privateAxios } from '../../../api/privateAxios';
+import auth from '../../../utilities/firebase.init';
 import Loader from '../../../utilities/Loader';
 import OrdersRow from './OrdersRow';
-export default function ManageOrders() {
-    
-    // const [user, loading, error] = useAuthState(auth);
+export default function ManageOrders() { 
+    const [user, loading, error] = useAuthState(auth);
     const navigate = useNavigate();
     const { isLoading, data, refetch } = useQuery(['orders'], () =>
         privateAxios(`/order`).then(res => {

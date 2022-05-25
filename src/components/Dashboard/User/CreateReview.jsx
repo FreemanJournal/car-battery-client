@@ -52,7 +52,7 @@ export default function CreateNewReview() {
           toast.success("You have posted a new review.")
           reset();
           setRatings()
-          // navigate('/dashboard/manageProduct')
+          navigate('/')
         }
       })
   }
