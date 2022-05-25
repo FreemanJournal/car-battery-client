@@ -75,7 +75,7 @@ export default function CheckoutForm({ order }) {
                 .then(({ data }) => {
                     setIsLoading(prev => !prev)
                     toast.success(data.message,{toastId:"Hello"})
-                    navigate('/dashboard')
+                    navigate('/dashboard/myOrders')
                     
                 })
             // toast.success(`Your payment is successful.Transaction ID is :${paymentIntent.id}`)

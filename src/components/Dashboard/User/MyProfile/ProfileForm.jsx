@@ -6,7 +6,6 @@ import { privateAxios } from '../../../../api/privateAxios';
 import auth from '../../../../utilities/firebase.init';
 
 export default function ProfileForm({ userData,refetch }) {
-    console.log('userData',userData);
 
     const [user, loading, error] = useAuthState(auth);
 

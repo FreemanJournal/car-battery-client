@@ -1,16 +1,17 @@
-import React, { useState } from 'react'
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { privateAxios } from '../api/privateAxios';
-import auth from '../utilities/firebase.init';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 
-export default function useAdmin() {
-    const [user, loading, error] = useAuthState(auth);
-    const [isAdmin, setIsAdmin] = useState();
+export default function useAdmin(user) {
+  const [isAdmin, setIsAdmin] = useState();
+  const [isLoading,SetIsLoading] = useState(true);
 
-    privateAxios.get(`/user/${user?.email}`)
-    .then(({data})=>{
-        setIsAdmin(!!data.isAdmin)
+  useEffect(()=>{
+    axios(`${process.env.REACT_APP_SERVER_URI}/isAdmin/${user?.email}`).then(({data}) => {
+      setIsAdmin(data.success)
+      SetIsLoading(false)
     })
+  },[user])
 
-  return {isAdmin}
+  return { isAdmin, adminLoading: isLoading }
 }

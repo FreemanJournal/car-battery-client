@@ -38,7 +38,7 @@ export default function PurchaseForm({ price, min_order, available, name }) {
                 if (data.success) {
                     toast.success("An order placed successfully")
                     reset()
-                    navigate('/dashboard')
+                    navigate('/dashboard/myOrders')
                 }
             })
 

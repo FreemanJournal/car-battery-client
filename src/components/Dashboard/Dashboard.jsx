@@ -4,19 +4,22 @@ import { BsFillBagPlusFill, BsFillChatRightQuoteFill, BsPersonBadge, BsPersonBou
 import { FcHome } from 'react-icons/fc';
 import { GrFormNext, GrShop } from 'react-icons/gr';
 import { Link, Outlet } from 'react-router-dom';
+import useAdmin from '../../hooks/useAdmin';
 import auth from '../../utilities/firebase.init';
+import Loader from '../../utilities/Loader';
 
 export default function Dashboard() {
     const [user, loading, error] = useAuthState(auth);
-    // const { isAdmin } = useAdmin(user)
-    const isAdmin = true
+    const { isAdmin, adminLoading } = useAdmin(user,loading)
+
+    if (adminLoading) return <Loader />
 
     const sideMenu = [
         {
             title: "My Orders",
-            path: "/dashboard",
+            path: "/dashboard/myOrders",
             icon: <GrShop />,
-            isActive: true
+            isActive: !isAdmin
         },
         {
             title: "My Profile",
@@ -28,31 +31,32 @@ export default function Dashboard() {
             title: "Give a review",
             path: "/dashboard/createNewReview",
             icon: <BsFillChatRightQuoteFill />,
-            isActive: true
+            isActive: !isAdmin
+        },
+        {
+            title: "Manage Orders",
+            path: "/dashboard/manageOrders",
+            icon: <BsSliders />,
+            isActive: isAdmin
         },
         {
             title: "Create new product",
             path: "/dashboard/createNewProduct",
             icon: <BsFillBagPlusFill />,
-            isActive: true
+            isActive: isAdmin
         },
         {
             title: "Manage Products",
             path: "/dashboard/manageProduct",
             icon: <BsSliders />,
-            isActive: true
+            isActive: isAdmin
         },
-        {
-            title: "Manage Orders",
-            path: "/dashboard/manageOrder",
-            icon: <BsSliders />,
-            isActive: true
-        },
+
         {
             title: "Make Admin",
             path: "/dashboard/makeAdmin",
             icon: <BsPersonPlusFill />,
-            isActive: true
+            isActive: isAdmin
         },
         {
             title: "My Portfolio",
@@ -68,9 +72,8 @@ export default function Dashboard() {
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content  relative">
                     {/* <!-- Page content here --> */}
+                    <h2 className='text-3xl text-pink-600 font-bold'>Welcome to your dashboard!</h2>
                     <Outlet />
-
-
                 </div>
                 <div className="drawer-side ">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
@@ -93,7 +96,7 @@ export default function Dashboard() {
                                             <Link
                                                 to={item.path}
                                                 key={i}
-                                                className="flex items-center focus:bg-amber-300 px-4 py-2 text-gray-700  bg-gray-100 rounded-lg hover:bg-slate-200  "
+                                                className={`${item.isActive ? "flex" : "hidden"} items-center focus:bg-amber-300 px-4 py-2 text-gray-700  bg-gray-100 rounded-lg hover:bg-slate-200`}
                                             >
                                                 {item.icon}
                                                 <span className="ml-3 text-sm font-medium uppercase">{item.title} </span>
@@ -104,25 +107,6 @@ export default function Dashboard() {
 
                                 </nav>
                             </div>
-                           
-
-                            {/* <div className="sticky inset-x-0 bottom-0 border-t border-gray-100">
-                                <Link to="/dashboard" className="flex items-center p-4 bg-white hover:bg-gray-50 shrink-0">
-                                    <img
-                                        className="object-cover w-10 h-10 rounded-full"
-                                        src="https://www.hyperui.dev/photos/man-4.jpeg"
-                                        alt="Simon Lewis"
-                                    />
-
-                                    <div className="ml-1.5">
-                                        <p className="text-xs">
-                                            <strong className="block font-medium">{user?.displayName || "Set the name"}</strong>
-
-                                            <span> {user?.email} </span>
-                                        </p>
-                                    </div>
-                                </Link>
-                            </div> */}
                         </div>
                     </ul>
 
