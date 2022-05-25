@@ -1,15 +1,14 @@
 import React from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { privateAxios } from '../../../../api/privateAxios';
-import auth from '../../../../utilities/firebase.init';
+import useAdmin from '../../../../hooks/useAdmin';
 import Loader from '../../../../utilities/Loader';
 import UserRow from './UserRow';
 
 export default function MakeAdmin() { 
-    const [user, loading, error] = useAuthState(auth);
     const navigate = useNavigate();
+    const {isAdmin} = useAdmin();
     const { isLoading, data, refetch } = useQuery(['users'], () =>
         privateAxios(`/user`).then(res => {
             // if (res.status !== 200) {
@@ -60,7 +59,7 @@ export default function MakeAdmin() {
 
                         <tbody className="divide-y divide-gray-100">
                             {
-                                data?.map((user, i) => <UserRow refetch={refetch} user={user} key={i} index={i} />)
+                                data?.map((user, i) => <UserRow refetch={refetch} user={user} key={i} index={i} isAdmin={isAdmin}/>)
                             }
 
                         </tbody>

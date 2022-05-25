@@ -1,26 +1,35 @@
 import React, { useState } from 'react'
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
 import swal from 'sweetalert';
 import { privateAxios } from '../../../../api/privateAxios';
+import useAdmin from '../../../../hooks/useAdmin';
+import auth from '../../../../utilities/firebase.init';
 
-export default function UserRow({ refetch,  user, index }) {
-    const { _id, displayName,email } = user;
-    const shipmentHandler = () => {
-        // privateAxios.patch(`/shipping/${_id}`)
-        //     .then(({ data }) => {
-        //         toast.success(data.message, { toastId: "bro" })
-        //         refetch()
-        //     })
+export default function UserRow({ refetch, user, index,isAdmin }) {
+    const { _id, displayName, email,isAdmin:amIAdmin } = user;
+    const [authUser, loading, error] = useAuthState(auth);
+
+    console.log('isAdmin',isAdmin);
+    console.log('amIAdmin',!!amIAdmin);
+
+    const adminHandler = async () => {
+        const { data } = await privateAxios.put('/user', { email, status: true })
+        if (data.success) {
+            toast.success(`${displayName} become a admin`)
+            refetch();
+        }
     }
-    const deleteHandler = async (id) => {
-        // const value = await swal({ title: `Do you want to DELETE this order ?`, buttons: true, dangerMode: true, icon: "warning" })
-        // if (!value) return;
-        // privateAxios.delete(`/order/${id}`).then(({ data }) => {
-        //     if (data.success) {
-        //         toast.success(data.message)
-        //         refetch();
-        //     }
-        // })
+   
+    const deleteHandler = async (email) => {
+        const value = await swal({ title: `Do you want to DELETE this user ?`, buttons: true, dangerMode: true, icon: "warning" })
+        if (!value) return;
+        privateAxios.delete(`/user/${email}`).then(({ data }) => {
+            if (data.success) {
+                toast.success(data.message)
+                refetch();
+            }
+        })
     }
     return (
         <tr>
@@ -33,34 +42,26 @@ export default function UserRow({ refetch,  user, index }) {
             </td>
 
             <td className="p-4 text-gray-700 whitespace-nowrap">{email}</td>
-            
 
-            {/* <td className="p-4 text-gray-700 whitespace-nowrap">{
-                <p className={`${!!paid ? 'text-emerald-500' : 'text-pink-500'}`} >
+
+            <td className="p-4 text-gray-700 whitespace-nowrap">
+                <p className={`${!!amIAdmin ? 'text-emerald-500' : 'text-pink-500'}`} >
                     <span className="text-sm font-medium ">
-                        {paid ? "Paid" : "Unpaid"}
+                        {!!amIAdmin ? "Admin" : "User"}
                     </span>
                 </p>
 
-            }</td> */}
-            {/* <td className="p-4 text-gray-700 whitespace-nowrap">
-                {
-                    !!paid ?
-                        <button className={`relative inline-flex items-center px-8 py-2 overflow-hidden text-white ${!!isShipped?"bg-emerald-400":"bg-pink-500"} rounded group  focus:outline-none focus:ring disabled:cursor-not-allowed disabled:opacity-50`} onClick={shipmentHandler} disabled={!!isShipped}>
-                            <span className="text-sm font-medium ">
-                                {!!isShipped ? "Shipped" : "Pending"}
-                            </span>
-                        </button>
-                        :
-                        <button className="relative inline-flex items-center px-8 py-2 overflow-hidden text-white bg-pink-500 rounded group  focus:outline-none focus:ring disabled:cursor-not-allowed disabled:opacity-50" disabled>
-                            <span className="text-sm font-medium ">
-                                Pending
-                            </span>
-                        </button>
-                }
             </td>
             <td className="p-4 text-gray-700 whitespace-nowrap">
-                <button className="relative inline-flex items-center px-8 py-2 overflow-hidden text-white bg-pink-500 rounded group  focus:outline-none focus:ring disabled:cursor-not-allowed disabled:opacity-50" onClick={() => deleteHandler(_id)} disabled={!!paid}>
+                <button className={`relative inline-flex items-center px-5 py-2 overflow-hidden text-white ${!!isAdmin ? "bg-emerald-400" : "bg-pink-500 hover:bg-pink-700"} rounded group  focus:outline-none focus:ring disabled:cursor-not-allowed disabled:opacity-50`} onClick={adminHandler} disabled={email === authUser?.email || !isAdmin}>
+                    <span className="text-sm font-medium ">
+                        Make Admin
+                    </span>
+                </button>
+            </td>
+      
+            {/* <td className="p-4 text-gray-700 whitespace-nowrap">
+                <button className="relative inline-flex items-center px-8 py-2 overflow-hidden text-white bg-pink-500 hover:bg-pink-700 rounded group  focus:outline-none focus:ring-0 focus:border-0 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-pink-500" onClick={() => deleteHandler(email)} disabled={email === authUser?.email || !isAdmin}>
                     <span className="text-sm font-medium ">
                         Delete
                     </span>
