@@ -6,14 +6,11 @@ import auth from '../../utilities/firebase.init';
 import { FcHome } from "react-icons/fc";
 export default function Navbar() {
   const [user, loading, error] = useAuthState(auth);
-  const [display, setDisplay] = useState(true);
   const menuItems = [
-    { item: 'Home', href: "/", status: display },
-    // { item: 'About', href: "/about", status: display },
-    // { item: 'Orders', href: "/orders", status: display },
-    // { item: 'Reviews', href: "/reviews", status: display },
-    // { item: 'Contact', href: "/contact", status: display },
+    { item: 'Home', href: "/", status: true },
     { item: 'Dashboard', href: "/dashboard", status: !!user },
+    { item: 'Blogs', href: "/blog", status: true },
+    { item: 'My Portfolio', href: "/portfolio", status: true },
     { item: 'SignIn', href: "/signIn", status: !user },
     { item: 'Registration', href: "/registration", status: !user }]
 
@@ -23,7 +20,8 @@ export default function Navbar() {
   };
   return (
     <section className="navbar bg-base-100 mx-auto md:px-32">
-      <div className="navbar-start w-10/12">
+      <div className="navbar-start ">
+        {/* Mobile Menu */}
         <div className="dropdown">
           <label tabIndex="0" className="btn btn-ghost lg:hidden">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
@@ -37,12 +35,13 @@ export default function Navbar() {
         </div>
         <NavLink to={"/"} className="normal-case text-xl font-medium">Speed Battery Manufacturer</NavLink>
       </div>
+      {/* Desktop Menu */}
       <div className="navbar-end hidden lg:flex">
         <ul className="menu menu-horizontal p-0 lg:uppercase lg:text-gray-500 lg:tracking-wide lg:font-bold lg:text-xs lg:space-x-4 lg:flex">
           {menuItems.map((menu, index) => (
-            <NavLink to={menu.href} key={index} style={({ isActive }) => isActive ? { borderBottom:'5px solid rgb(185 28 28 / 1)',color:'rgb(185 28 28 / 1)' } : {}} className={`block h-16 leading-[4rem] border-b-4 border-transparent hover:text-red-700 hover:border-current ${menu.status ? "" : "hidden"}`}>{menu.item}</NavLink>
+            <NavLink to={menu.href} key={index} style={({ isActive }) => isActive ? { borderBottom: '5px solid rgb(185 28 28 / 1)', color: 'rgb(185 28 28 / 1)' } : {}} className={`block h-16 leading-[4rem] border-b-4 border-transparent hover:text-red-700 hover:border-current ${menu.status ? "" : "hidden"}`}>{menu.item}</NavLink>
           ))}
-          {user && <Link to="/dashboard"  className={`block h-16 leading-[4rem] border-b-4 border-transparent hover:text-red-700 hover:border-0`}>{user?.displayName}</Link>}
+          {user && <Link to="/dashboard" className={`block h-16 leading-[4rem] border-b-4 border-transparent hover:text-red-700 hover:border-0`}>{user?.displayName}</Link>}
 
           {user && <button onClick={() => signOutHandler()} className='block uppercase font-bold h-16 leading-[4rem] border-b-4 border-transparent hover:text-red-700 hover:border-current'>Sign Out</button>}
 

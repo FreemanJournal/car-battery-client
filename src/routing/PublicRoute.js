@@ -10,8 +10,11 @@ import MyOrders from '../components/Dashboard/User/MyOrders'
 import MyProfile from '../components/Dashboard/User/MyProfile/MyProfile'
 import Payment from '../components/Dashboard/User/Payment'
 import MyPortfolio from '../components/MyPortfolio/MyPortfolio'
+import BlogPage from '../pages/BlogPage'
 import DashboardPage from '../pages/DashboardPage'
 import Home from '../pages/Home'
+import MyPortfolioPage from '../pages/MyPortfolioPage'
+import NotFound from '../pages/NotFound'
 import PurchasePage from '../pages/PurchasePage'
 import Registration from '../pages/Registration'
 import SignInPage from '../pages/SignInPage'
@@ -20,7 +23,7 @@ import PrivateRoute from './PrivateRoute'
 
 
 export default function PublicRoute() {
- 
+
 
 
   return (
@@ -30,7 +33,6 @@ export default function PublicRoute() {
       <Route path='/registration' element={<Registration />} />
       <Route path='/purchasePage/:productID' element={<PrivateRoute><PurchasePage /></PrivateRoute>} />
       <Route path='dashboard' element={<PrivateRoute><DashboardPage /></PrivateRoute>}>
-        
         {/* Admin Routes */}
         <Route path='manageOrders' element={<AdminRoute><ManageOrders /></AdminRoute>} />
         <Route path='manageProduct' element={<AdminRoute><ManageProducts /></AdminRoute>} />
@@ -43,8 +45,10 @@ export default function PublicRoute() {
         <Route path='payment/:productID' element={<Payment />} />
 
         <Route path='myProfile' element={<MyProfile />} />
-        <Route path='portfolio' element={<MyPortfolio />} />
       </Route>
+      <Route path='blog' element={<BlogPage/>} />
+      <Route path='portfolio' element={<MyPortfolioPage />} />
+      <Route path='*' element={<NotFound />} />
 
     </Routes>
   )

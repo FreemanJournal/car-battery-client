@@ -34,7 +34,7 @@ export default function Dashboard() {
             isActive: !isAdmin
         },
         {
-            title: "Manage Orders",
+            title: "Manage All Orders",
             path: "/dashboard/manageOrders",
             icon: <BsSliders />,
             isActive: isAdmin
@@ -58,12 +58,12 @@ export default function Dashboard() {
             icon: <BsPersonPlusFill />,
             isActive: isAdmin
         },
-        {
-            title: "My Portfolio",
-            path: "/dashboard/portfolio",
-            icon: <BsPersonBoundingBox />,
-            isActive: true
-        },
+        // {
+        //     title: "My Portfolio",
+        //     path: "/dashboard/portfolio",
+        //     icon: <BsPersonBoundingBox />,
+        //     isActive: true
+        // },
     ]
 
     return (

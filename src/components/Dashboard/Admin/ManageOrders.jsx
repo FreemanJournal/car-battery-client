@@ -33,7 +33,7 @@ export default function ManageOrders() {
                     <span className="absolute inset-x-0 h-px -translate-y-1/2 bg-black/10 top-1/2"></span>
 
                     <h2 className="relative inline-block px-4 text-2xl font-bold text-center bg-white">
-                        Manage Orders
+                        Manage All Orders
                     </h2>
                 </div>
                 <div className="overflow-x-auto mb-32 mt-10">
