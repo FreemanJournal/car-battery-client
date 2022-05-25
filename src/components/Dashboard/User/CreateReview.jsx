@@ -64,7 +64,7 @@ export default function CreateNewReview() {
       <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
           <div className="p-8 bg-white rounded-lg shadow-lg lg:p-12 lg:col-span-5">
-            <h2 className='uppercase font-bold mb-5'>Give a review</h2>
+          <p href="" className="text-xl font-bold text-pink-600 mb-5"> Give a review </p>
             <form onSubmit={handleSubmit(onSubmitHandler)} className="space-y-4">
               <div className='relative'>
                 <div className="mt-1 flex items-center">

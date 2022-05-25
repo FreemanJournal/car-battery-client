@@ -1,9 +1,8 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { FcAbout, FcHome, FcNext, FcBusinessman, FcBusinesswoman, FcServices, FcSettings, FcTodoList, FcPlus } from 'react-icons/fc';
-import { GrShop, GrFormNext } from 'react-icons/gr';
-import { CgProfile } from 'react-icons/cg';
-import { BsFillChatRightTextFill } from 'react-icons/bs';
+import { BsFillBagPlusFill, BsFillChatRightQuoteFill, BsPersonBadge, BsPersonBoundingBox, BsPersonPlusFill, BsSliders } from 'react-icons/bs';
+import { FcHome } from 'react-icons/fc';
+import { GrFormNext, GrShop } from 'react-icons/gr';
 import { Link, Outlet } from 'react-router-dom';
 import auth from '../../utilities/firebase.init';
 
@@ -22,37 +21,43 @@ export default function Dashboard() {
         {
             title: "My Profile",
             path: "/dashboard/myProfile",
-            icon: <CgProfile />,
+            icon: <BsPersonBadge />,
             isActive: true
         },
         {
             title: "Give a review",
             path: "/dashboard/createNewReview",
-            icon: <BsFillChatRightTextFill />,
+            icon: <BsFillChatRightQuoteFill />,
             isActive: true
         },
         {
             title: "Create new product",
             path: "/dashboard/createNewProduct",
-            icon: <FcPlus />,
+            icon: <BsFillBagPlusFill />,
             isActive: true
         },
         {
             title: "Manage Products",
             path: "/dashboard/manageProduct",
-            icon: <FcServices />,
+            icon: <BsSliders />,
             isActive: true
         },
         {
             title: "Manage Orders",
             path: "/dashboard/manageOrder",
-            icon: <FcServices />,
+            icon: <BsSliders />,
             isActive: true
         },
         {
-            title: "Settings",
-            path: "/dashboard",
-            icon: <FcSettings />,
+            title: "Make Admin",
+            path: "/dashboard/makeAdmin",
+            icon: <BsPersonPlusFill />,
+            isActive: true
+        },
+        {
+            title: "My Portfolio",
+            path: "/dashboard/portfolio",
+            icon: <BsPersonBoundingBox />,
             isActive: true
         },
     ]

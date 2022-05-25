@@ -29,7 +29,7 @@ export default function ProfileForm({ userData,refetch }) {
 
 
                     <div className="p-8 bg-white rounded-lg shadow-lg lg:p-12 lg:col-span-5">
-                        <p href="" className="text-2xl font-bold text-pink-600 mb-5"> My Profile </p>
+                        <p href="" className="text-xl font-bold text-pink-600 mb-5 "> My profile </p>
 
                         <form onSubmit={handleSubmit(submitHandler)} className="space-y-4">
 
