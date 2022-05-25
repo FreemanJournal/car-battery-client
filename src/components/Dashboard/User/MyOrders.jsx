@@ -1,16 +1,18 @@
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import swal from 'sweetalert';
 import { privateAxios } from '../../../api/privateAxios';
+import auth from '../../../utilities/firebase.init';
 import Loader from '../../../utilities/Loader';
 
 export default function MyOrders() {
-  // const [user, loading, error] = useAuthState(auth);
+  const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
-  const { isLoading, data,refetch } = useQuery(['orders'], () =>
-    privateAxios(`/order`).then(res => {
+  const { isLoading, data,refetch } = useQuery('myOrder', () =>
+    privateAxios(`/myOrder/${user?.email}`).then(res => {
       // if (res.status !== 200) {
       //   signOut(auth)
       //   localStorage.removeItem('accessToken')

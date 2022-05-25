@@ -6,7 +6,7 @@ import ManageProducts from '../components/Dashboard/Admin/ManageProducts'
 import UpdateProducts from '../components/Dashboard/Admin/UpdateProducts'
 import CreateNewReview from '../components/Dashboard/User/CreateReview'
 import MyOrders from '../components/Dashboard/User/MyOrders'
-import MyProfile from '../components/Dashboard/User/MyProfile'
+import MyProfile from '../components/Dashboard/User/MyProfile/MyProfile'
 import Payment from '../components/Dashboard/User/Payment'
 
 import DashboardPage from '../pages/DashboardPage'

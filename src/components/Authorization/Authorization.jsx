@@ -14,7 +14,7 @@ export default function Authorization({ signIn }) {
     const { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, signInWithGoogle, errorMessage, authLoading, setAuthProvider } = useAuthProviderHandler()
 
     const createUser = async (user) => {
-        if (!user.displayName) return;
+        if (!user?.displayName) return;
         const { displayName, email } = user
         const userData = {displayName, email}
         // create access token
