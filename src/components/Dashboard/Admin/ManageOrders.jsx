@@ -9,7 +9,7 @@ import OrdersRow from './OrdersRow';
 export default function ManageOrders() { 
     const [user, loading, error] = useAuthState(auth);
     const navigate = useNavigate();
-    const { isLoading, data, refetch } = useQuery(['orders'], () =>
+    const { isLoading, data, refetch } = useQuery(['manageOrder'], () =>
         privateAxios(`/order`).then(res => {
             // if (res.status !== 200) {
             //   signOut(auth)

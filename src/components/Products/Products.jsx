@@ -1,11 +1,11 @@
+import axios from 'axios'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { useNavigate } from 'react-router-dom'
-import { privateAxios } from '../../api/privateAxios'
 import Loader from '../../utilities/Loader'
 
 export default function Products() {
-    const { isLoading, error, data: products } = useQuery('products', () => privateAxios('/product').then(result => result.data))
+    const { isLoading, error, data: products } = useQuery('products', () => axios(`${process.env.REACT_APP_SERVER_URI}/product`).then(result => result.data))
     const navigate = useNavigate();
     if (isLoading) return <Loader />;
 

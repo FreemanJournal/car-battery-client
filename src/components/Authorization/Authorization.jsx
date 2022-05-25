@@ -14,16 +14,16 @@ export default function Authorization({ signIn }) {
     const { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, signInWithGoogle, errorMessage, authLoading, setAuthProvider } = useAuthProviderHandler()
 
     const createUser = async (user) => {
-        console.log('create User',user?.displayName);
-        if (!user?.displayName) return;
+        if (!user?.displayName || !user?.email) return;
         const { displayName, email } = user
         const userData = {displayName, email}
+        console.log('create User',displayName,email);
         // create access token
-        const { data } = await axios.post(`${process.env.REACT_APP_SERVER_URI}/createToken`, email)
+        const { data } = await axios.post(`${process.env.REACT_APP_SERVER_URI}/createToken`, {email})
         localStorage.setItem('accessToken', data.authAccessToken)
         // create user to database
         const uri = `${process.env.REACT_APP_SERVER_URI}/user`
-        user && await axios.post(uri, userData)
+        user && axios.post(uri, userData)
     }
 
 
@@ -56,7 +56,7 @@ export default function Authorization({ signIn }) {
 
     useEffect(() => {
         createUser(user)
-    }, [user])
+    }, [!!user])
 
 
 

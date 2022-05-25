@@ -10,11 +10,8 @@ export default function UserRow({ refetch, user, index,isAdmin }) {
     const { _id, displayName, email,isAdmin:amIAdmin } = user;
     const [authUser, loading, error] = useAuthState(auth);
 
-    console.log('isAdmin',isAdmin);
-    console.log('amIAdmin',!!amIAdmin);
-
     const adminHandler = async () => {
-        const { data } = await privateAxios.put('/user', { email, status: true })
+        const { data } = await privateAxios.put('/user/admin', { email, status: true })
         if (data.success) {
             toast.success(`${displayName} become a admin`)
             refetch();

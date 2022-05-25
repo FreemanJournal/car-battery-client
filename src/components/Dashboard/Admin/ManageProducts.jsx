@@ -6,7 +6,7 @@ import swal from 'sweetalert';
 import { privateAxios } from '../../../api/privateAxios';
 import Loader from '../../../utilities/Loader';
 export default function ManageProducts() {
-  const { isLoading, error, refetch, data: products } = useQuery('products', () => privateAxios('/product_all').then(result => result.data))
+  const { isLoading, error, refetch, data: products } = useQuery('product_all', () => privateAxios('/product_all').then(result => result.data))
   const navigate = useNavigate();
 
 

@@ -66,7 +66,7 @@ export default function TestimonialSlider() {
                                                 // changeRating={changeRating}
                                                 numberOfStars={5}
                                                 name='rating'
-                                                starDimension={15}
+                                                starDimension={'15px'}
                                             />
                                         </div>
                                     </div>

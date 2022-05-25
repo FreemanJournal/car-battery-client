@@ -17,7 +17,7 @@ export default function ProfileForm({ userData,refetch }) {
     // }, [userData])
 
     const submitHandler = async (value) => {
-        const { data } = await privateAxios.post('/user', value)
+        const { data } = await privateAxios.put('/user/update', value)
         if (data.success) {
             toast.success('You have successfully update your profile.')
         }
