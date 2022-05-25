@@ -14,6 +14,7 @@ export default function Authorization({ signIn }) {
     const { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, signInWithGoogle, errorMessage, authLoading, setAuthProvider } = useAuthProviderHandler()
 
     const createUser = async (user) => {
+        console.log('create User',user?.displayName);
         if (!user?.displayName) return;
         const { displayName, email } = user
         const userData = {displayName, email}
@@ -43,6 +44,7 @@ export default function Authorization({ signIn }) {
                 .then(async () => {
                     setAuthProvider('updating')
                     await updateProfile({ displayName })
+                    createUser({displayName,email})  
                 })
         }
     }, [signIn])
@@ -98,7 +100,7 @@ export default function Authorization({ signIn }) {
                 <form onSubmit={handleSubmit(onSubmitHandler)}>
                     {
                         !signIn && <div className="mt-4">
-                            <label className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200" htmlFor="displayName">DisplayName</label>
+                            <label className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200" htmlFor="displayName">Username</label>
                             {/* pattern matches displayName like ishaqrabbu with no space and not number */}
                             <input required id="displayName" className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300" type="text"  {...register("displayName")} />
                         </div>

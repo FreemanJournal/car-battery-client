@@ -78,7 +78,7 @@ export default function CreateNewReview() {
                   >
                     <div className="flex gap-3">
 
-                      <span>Md Ishaq</span>
+                      <span>{user?.displayName}</span>
                     </div>
                   </label>
                 </div>

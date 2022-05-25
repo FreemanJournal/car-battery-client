@@ -1,8 +1,10 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { privateAxios } from '../../../api/privateAxios';
+import auth from '../../../utilities/firebase.init';
 
 export default function CheckoutForm({ order }) {
     const stripe = useStripe();
@@ -12,7 +14,7 @@ export default function CheckoutForm({ order }) {
     const [transectionId, setTransactionId] = useState();
     const [isLoading, setIsLoading] = useState(false);
     const { _id, address, phone, quantity, name, email, rate, total, orderID, paid, transactionId } = order;
-    console.log('payment info',phone,email,total);
+    const [user, loading, error] = useAuthState(auth);
 
     const navigate = useNavigate()
     useEffect(() => {
@@ -50,7 +52,7 @@ export default function CheckoutForm({ order }) {
                 payment_method: {
                     card: card,
                     billing_details: {
-                        name: "Md Ishaq",
+                        name:user?.displayName,
                         email: email,
                         phone: phone
                     },
@@ -63,7 +65,7 @@ export default function CheckoutForm({ order }) {
         } else {
             const paymentInfo = {
                 transactionId: paymentIntent.id,
-                name: "Md Ishaq",
+                name: user?.displayName,
                 email: email,
                 phone: phone,
                 product:name
@@ -117,7 +119,7 @@ export default function CheckoutForm({ order }) {
                     disabled={!stripe || !cLientSecret || isLoading}
 
                 >
-                    {isLoading &&  <svg class="motion-reduce:hidden animate-spin ..." viewBox="0 0 24 24"></svg>}
+                    {/* {isLoading &&  <svg class="motion-reduce:hidden animate-spin ..." viewBox="0 0 24 24"></svg>} */}
                     Confirm Payment
                 </button>
             </form>

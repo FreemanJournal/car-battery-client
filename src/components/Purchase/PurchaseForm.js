@@ -6,11 +6,14 @@ import { v4 as uuidv4 } from 'uuid';
 import { privateAxios } from '../../api/privateAxios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../utilities/firebase.init';
 export default function PurchaseForm({ price, min_order, available, name }) {
     const { register, handleSubmit, setValue, reset, setError, clearErrors, watch, formState: { errors } } = useForm({ resolver: yupResolver(purchaseSchema) });
     const watchQuantity = watch("quantity");
     const watchPhone = watch("phone");
     const watchAddress = watch("address");
+    const [user, loading, error] = useAuthState(auth);
 
     useEffect(() => {
         reset({
@@ -42,8 +45,8 @@ export default function PurchaseForm({ price, min_order, available, name }) {
     }
     const onClickHandler = () => {
         setValue('name', name)
-        setValue('customer_Name', "Md Ishaq")
-        setValue('email', "ishaqrabbu97@gmail.com")
+        setValue('customer_Name', user?.displayName)
+        setValue('email', user?.email)
         setValue('rate', price)
         setValue('total', price * (+watchQuantity))
         setValue('orderID', uuidv4());
@@ -54,11 +57,11 @@ export default function PurchaseForm({ price, min_order, available, name }) {
             <div className="h-1/2">
                 <div className="flex border-t border-gray-200 py-2">
                     <span className="text-gray-500">Name</span>
-                    <span className="ml-auto text-gray-900">Md Ishaq</span>
+                    <span className="ml-auto text-gray-900">{user?.displayName}</span>
                 </div>
                 <div className="flex border-t border-gray-200 py-2">
                     <span className="text-gray-500">Email</span>
-                    <span className="ml-auto text-gray-900">ishaqrabbu97@gmail.com</span>
+                    <span className="ml-auto text-gray-900">{user?.email}</span>
                 </div>
                 <div className="flex border-t border-gray-200 py-2">
                     <span className="text-gray-500">Minimum Order Quantity</span>

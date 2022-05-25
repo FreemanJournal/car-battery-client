@@ -1,6 +1,9 @@
 import React from 'react'
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../utilities/firebase.init';
 
 export default function ContactUs() {
+    const [user, loading, error] = useAuthState(auth);
 
 
     return (
@@ -25,7 +28,7 @@ export default function ContactUs() {
                                 </div>
                                 <div className="lg:w-1/2 px-6 mt-4 lg:mt-0">
                                     <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">EMAIL</h2>
-                                    <p className="text-indigo-500 leading-relaxed">ishaqrabbu97@gmail.com</p>
+                                    <p className="text-indigo-500 leading-relaxed">{user?.email}</p>
                                     <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">PHONE</h2>
                                     <p className="leading-relaxed">+8801985257752</p>
                                 </div>
