@@ -72,7 +72,7 @@ export default function Dashboard() {
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content  relative">
                     {/* <!-- Page content here --> */}
-                    <h2 className='text-3xl text-pink-600 font-bold'>Welcome to your dashboard!</h2>
+                    <h2 className='text-3xl text-pink-600 font-bold mb-10'>Welcome to your dashboard!</h2>
                     <Outlet />
                 </div>
                 <div className="drawer-side ">
