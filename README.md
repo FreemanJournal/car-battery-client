@@ -20,6 +20,6 @@
 * Stripe.JS for payment
 * Firebase Authentication & hosting
 * JWT Authentication
-* library - axios,swr,useForm,swiper,sweetAlert etc
+* library - axios,useQuery,useForm,swiper,sweetAlert etc
 * MongoDb,Express & Nodejs
 * Heroku for Database hosting 
