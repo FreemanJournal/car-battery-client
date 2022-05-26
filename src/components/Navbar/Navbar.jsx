@@ -4,13 +4,15 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { FcHome } from "react-icons/fc";
 import { Link, NavLink } from 'react-router-dom';
 import auth from '../../utilities/firebase.init';
+
 export default function Navbar() {
   const [user, loading, error] = useAuthState(auth);
+
   const menuItems = [
     { item: 'Home', href: "/", status: true },
-    { item: 'Dashboard', href: "/dashboard", status: !!user },
     { item: 'Blogs', href: "/blog", status: true },
     { item: 'My Portfolio', href: "/portfolio", status: true },
+    { item: 'Dashboard', href: "/dashboard", status: !!user },
     { item: 'SignIn', href: "/signIn", status: !user },
     { item: 'Registration', href: "/registration", status: !user }]
 
@@ -18,6 +20,7 @@ export default function Navbar() {
     localStorage.removeItem('accessToken')
     signOut(auth);
   };
+
   return (
     <section className="navbar bg-base-100 mx-auto md:px-32">
       <div className="navbar-start ">
