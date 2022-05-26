@@ -33,7 +33,7 @@ export default function Navbar() {
             {user && <button onClick={() => signOutHandler()} className='btn btn-ghost mx-3 hover:bg-slate-600 hover:text-white duration-300'>Sign Out</button>}
           </ul>
         </div>
-        <NavLink to={"/"} className="normal-case text-xl font-medium">Speed Battery Manufacturer</NavLink>
+        <NavLink to={"/"} className="normal-case text-xl font-medium text-teal-600">Speed Battery Manufacturer</NavLink>
       </div>
       {/* Desktop Menu */}
       <div className="navbar-end hidden lg:flex">
