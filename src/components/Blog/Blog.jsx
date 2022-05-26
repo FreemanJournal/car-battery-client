@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React from 'react';
 import { useQuery } from 'react-query';
 import Loader from '../../utilities/Loader';
 
@@ -7,18 +7,7 @@ export default function Blog() {
     const { isLoading, error, data } = useQuery('blog', () => axios(`${process.env.REACT_APP_SERVER_URI}/blog`).then(({ data }) => data))
 
     if (isLoading) return <Loader/>
-    
-    // const [blogs, setBlogs] = useState();
-
-    // const getData = async () => {
-    //     const { data } = await axios(`${process.env.REACT_APP_SERVER_URI}/blog`)
-    //     setBlogs(data)
-    // }
-    // useEffect(() => getData(), [])
-
-
-
-
+   
     return (
         <section>
             <div className="max-w-screen-xl px-4 py-8 mx-auto">

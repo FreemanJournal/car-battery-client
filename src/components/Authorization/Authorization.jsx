@@ -3,7 +3,6 @@ import React, { useCallback, useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import useAuthProviderHandler from '../../hooks/useAuthProviderHandler';
 import auth from '../../utilities/firebase.init';
 import Loader from '../../utilities/Loader';

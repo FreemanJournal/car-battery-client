@@ -1,9 +1,9 @@
 import { signOut } from 'firebase/auth';
-import React, { useState } from 'react'
+import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link, NavLink } from 'react-router-dom'
-import auth from '../../utilities/firebase.init';
 import { FcHome } from "react-icons/fc";
+import { Link, NavLink } from 'react-router-dom';
+import auth from '../../utilities/firebase.init';
 export default function Navbar() {
   const [user, loading, error] = useAuthState(auth);
   const menuItems = [

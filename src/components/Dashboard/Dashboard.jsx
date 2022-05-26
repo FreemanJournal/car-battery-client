@@ -58,12 +58,7 @@ export default function Dashboard() {
             icon: <BsPersonPlusFill />,
             isActive: isAdmin
         },
-        // {
-        //     title: "My Portfolio",
-        //     path: "/dashboard/portfolio",
-        //     icon: <BsPersonBoundingBox />,
-        //     isActive: true
-        // },
+       
     ]
 
     return (
