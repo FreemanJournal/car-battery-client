@@ -10,8 +10,8 @@ export default function Navbar() {
 
   const menuItems = [
     { item: 'Home', href: "/", status: true },
-    { item: 'Blogs', href: "/blog", status: true },
-    { item: 'My Portfolio', href: "/portfolio", status: true },
+    // { item: 'Blogs', href: "/blog", status: true },
+    // { item: 'My Portfolio', href: "/portfolio", status: true },
     { item: 'Dashboard', href: "/dashboard", status: !!user },
     { item: 'SignIn', href: "/signIn", status: !user },
     { item: 'Registration', href: "/registration", status: !user }]
