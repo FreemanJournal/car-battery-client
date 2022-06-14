@@ -57,13 +57,13 @@ export default function UserRow({ refetch, user, index,isAdmin }) {
                 </button>
             </td>
       
-            {/* <td className="p-4 text-gray-700 whitespace-nowrap">
+            <td className="p-4 text-gray-700 whitespace-nowrap">
                 <button className="relative inline-flex items-center px-8 py-2 overflow-hidden text-white bg-pink-500 hover:bg-pink-700 rounded group  focus:outline-none focus:ring-0 focus:border-0 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-pink-500" onClick={() => deleteHandler(email)} disabled={email === authUser?.email || !isAdmin}>
                     <span className="text-sm font-medium ">
                         Delete
                     </span>
                 </button>
-            </td> */}
+            </td>
 
 
         </tr>

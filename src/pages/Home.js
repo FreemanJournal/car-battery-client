@@ -1,4 +1,5 @@
 import React from 'react'
+import Announcement from '../components/Announcement/Announcement'
 import BusinessSummery from '../components/BusinessSummery/BusinessSummery'
 import ContactUs from '../components/ContactUs/ContactUs'
 import FAQ from '../components/FAQ/FAQ'
@@ -11,6 +12,7 @@ import Reviews from '../components/Reviews/Reviews'
 export default function Home() {
   return (
     <div>
+      <Announcement/>
         <Navbar/>
         <HeroSection/>
         <Products/>

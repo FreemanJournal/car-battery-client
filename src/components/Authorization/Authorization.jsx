@@ -16,7 +16,6 @@ export default function Authorization({ signIn }) {
         if (!user?.displayName || !user?.email) return;
         const { displayName, email } = user
         const userData = {displayName, email}
-        console.log('create User',displayName,email);
         // create access token
         const { data } = await axios.post(`${process.env.REACT_APP_SERVER_URI}/createToken`, {email})
         localStorage.setItem('accessToken', data.authAccessToken)
@@ -54,6 +53,7 @@ export default function Authorization({ signIn }) {
     }
 
     useEffect(() => {
+        console.log('user',user);
         createUser(user)
     }, [!!user])
 

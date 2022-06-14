@@ -23,6 +23,7 @@ export default function Navbar() {
 
   return (
     <section className="navbar bg-base-100 mx-auto md:px-32">
+     
       <div className="navbar-start ">
         {/* Mobile Menu */}
         <div className="dropdown">
