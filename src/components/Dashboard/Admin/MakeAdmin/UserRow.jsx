@@ -15,7 +15,7 @@ export default function UserRow({ refetch, user, index,isAdmin }) {
         if (data.success) {
             toast.success(`${displayName} become a admin`)
             refetch();
-        }
+        } 
     }
    
     const deleteHandler = async (email) => {
