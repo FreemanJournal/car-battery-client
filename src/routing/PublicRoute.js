@@ -32,6 +32,7 @@ export default function PublicRoute() {
       <Route path='/signIn' element={<SignInPage />} />
       <Route path='/registration' element={<Registration />} />
       <Route path='/purchasePage/:productID' element={<PrivateRoute><PurchasePage /></PrivateRoute>} />
+      
       <Route path='dashboard' element={<PrivateRoute><DashboardPage /></PrivateRoute>}>
         {/* Admin Routes */}
         <Route path='manageOrders' element={<AdminRoute><ManageOrders /></AdminRoute>} />
@@ -46,6 +47,7 @@ export default function PublicRoute() {
 
         <Route path='myProfile' element={<MyProfile />} />
       </Route>
+
       <Route path='blog' element={<BlogPage/>} />
       <Route path='portfolio' element={<MyPortfolioPage />} />
       <Route path='*' element={<NotFound />} />
